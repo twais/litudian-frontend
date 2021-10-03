@@ -226,7 +226,7 @@ class Main extends Component {
 
                             <div className="flex flex-col shadow-md">
 
-                                <div className="bg-gray-50 h-36 rounded-t-md"></div>
+                                <div className="bg-white h-36 rounded-t-md"></div>
 
                                 <div className="bg-tangerine text-white text-center rounded-b-md py-1">Ksh 21,900</div>
 
@@ -234,7 +234,7 @@ class Main extends Component {
 
                             <div className="flex flex-col shadow-md">
 
-                                <div className="bg-gray-50 h-36 rounded-t-md"></div>
+                                <div className="bg-white h-36 rounded-t-md"></div>
 
                                 <div className="bg-tangerine text-white text-center rounded-b-md py-1">Ksh 21,900</div>
 
@@ -242,7 +242,7 @@ class Main extends Component {
 
                             <div className="flex flex-col shadow-md">
 
-                                <div className="bg-gray-50 h-36 rounded-t-md"></div>
+                                <div className="bg-white h-36 rounded-t-md"></div>
 
                                 <div className="bg-tangerine text-white text-center rounded-b-md py-1">Ksh 21,900</div>
 
@@ -250,7 +250,7 @@ class Main extends Component {
 
                             <div className="flex flex-col shadow-md">
 
-                                <div className="bg-gray-50 h-36 rounded-t-md"></div>
+                                <div className="bg-white h-36 rounded-t-md"></div>
 
                                 <div className="bg-tangerine text-white text-center rounded-b-md py-1">Ksh 21,900</div>
 
@@ -258,7 +258,7 @@ class Main extends Component {
 
                             <div className="flex flex-col shadow-md">
 
-                                <div className="bg-gray-50 h-36 rounded-t-md"></div>
+                                <div className="bg-white h-36 rounded-t-md"></div>
 
                                 <div className="bg-tangerine text-white text-center rounded-b-md py-1">Ksh 21,900</div>
 
@@ -266,7 +266,7 @@ class Main extends Component {
 
                             <div className="flex flex-col shadow-md">
 
-                                <div className="bg-gray-50 h-36 rounded-t-md"></div>
+                                <div className="bg-white h-36 rounded-t-md"></div>
 
                                 <div className="bg-tangerine text-white text-center rounded-b-md py-1">Ksh 21,900</div>
 
@@ -274,7 +274,7 @@ class Main extends Component {
 
                             <div className="flex flex-col shadow-md">
 
-                                <div className="bg-gray-50 h-36 rounded-t-md"></div>
+                                <div className="bg-white h-36 rounded-t-md"></div>
 
                                 <div className="bg-tangerine text-white text-center rounded-b-md py-1">Ksh 21,900</div>
 
@@ -288,7 +288,7 @@ class Main extends Component {
 
                 <div className="max-w-5xl mx-auto px-4 py-8 md:px-0 w-full">
 
-                    <p className="text-gray-600 font-bold">Litudian &copy; 2020</p>
+                    <p className="text-gray-600 font-bold">Litudian &copy; 2021</p>
 
                 </div>
                 
