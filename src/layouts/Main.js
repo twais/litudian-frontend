@@ -32,7 +32,7 @@ class Main extends Component {
 
                             <li className="inline-block mx-3 font-bold text-tangerine"><Link to="/profile">My Profile</Link></li>
 
-                            <li className="inline-block mx-3 font-bold text-tangerine"><a href="/">My Items</a></li>
+                            <li className="inline-block mx-3 font-bold text-tangerine"><Link to="/items">My Items</Link></li>
 
                             <li className="inline-block mx-3 font-bold text-tangerine"><a href="/">Sales</a></li>
 

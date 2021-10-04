@@ -8,6 +8,7 @@ import reportWebVitals from './reportWebVitals';
 import Profile from './pages/Profile';
 import Index from './pages/Index';
 import Account from './pages/Account';
+import Items from './pages/Items';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -16,6 +17,7 @@ ReactDOM.render(
         <Route exact path="/" component={Index} />
         <Route exact path="/profile" component={Profile} />
         <Route exact path="/account" component={Account} />
+        <Route exact path="/items" component={Items} />
       </Switch>
     </Router>
   </React.StrictMode>,
