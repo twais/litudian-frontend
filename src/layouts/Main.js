@@ -34,9 +34,11 @@ class Main extends Component {
 
                             <li className="inline-block mx-3 font-bold text-tangerine"><Link to="/items">My Items</Link></li>
 
-                            <li className="inline-block mx-3 font-bold text-tangerine"><a href="/">Sales</a></li>
+                            <li className="inline-block mx-3 font-bold text-tangerine"><Link to="/">Sales</Link></li>
 
-                            <li className="inline-block mx-3 font-bold text-tangerine"><a href="/">Forum</a></li>
+                            <li className="inline-block mx-3 font-bold text-tangerine"><Link to="/forum">Forum</Link></li>
+
+                            <li className="inline-block mx-3 font-bold text-tangerine"><Link to="/request-item">Request Item</Link></li>
 
                         </ul>
 

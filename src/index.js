@@ -11,6 +11,8 @@ import Account from './pages/Account';
 import Items from './pages/Items';
 import ItemInStock from './pages/ItemInStock';
 import ItemInTransit from './pages/ItemInTransit';
+import RequestItem from './pages/RequestItem';
+import Forum from './pages/Forum';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -22,6 +24,8 @@ ReactDOM.render(
         <Route exact path="/items" component={Items} />
         <Route exact path="/items/in-stock" component={ItemInStock} />
         <Route exact path="/items/in-transit" component={ItemInTransit} />
+        <Route exact path="/request-item" component={RequestItem} />
+        <Route exact path="/forum" component={Forum} />
       </Switch>
     </Router>
   </React.StrictMode>,
