@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import Layout from './../layouts/Main';
 
 export default class Items extends Component {
@@ -23,9 +24,9 @@ export default class Items extends Component {
 
                 <div className="flex flex-row gap-x-3">
 
-                    <span className="bg-litudian-orange text-gray-50 font-bold px-4 rounded-lg text-xs py-1 uppercase">In Stock</span>
+                    <Link to="/items/in-stock" className="bg-litudian-orange text-gray-50 font-bold px-4 rounded-lg text-xs py-1 uppercase">In Stock</Link>
 
-                    <span className="bg-litudian-orange text-gray-50 font-bold px-4 rounded-lg text-xs py-1 uppercase">In Transit</span>
+                    <Link to="/items/in-transit" className="bg-litudian-orange text-gray-50 font-bold px-4 rounded-lg text-xs py-1 uppercase">In Transit</Link>
 
                 </div>
 
@@ -141,7 +142,7 @@ export default class Items extends Component {
 
                         <div className="flex flex-col shadow-md">
 
-                            <div className="bg-gray-50 h-36 rounded-t-md"></div>
+                            <div className="bg-white h-36 rounded-t-md"></div>
 
                             <div className="bg-tangerine text-white text-center rounded-b-md py-1">Ksh 21,900</div>
 
@@ -149,7 +150,7 @@ export default class Items extends Component {
 
                         <div className="flex flex-col shadow-md">
 
-                            <div className="bg-gray-50 h-36 rounded-t-md"></div>
+                            <div className="bg-white h-36 rounded-t-md"></div>
 
                             <div className="bg-tangerine text-white text-center rounded-b-md py-1">Ksh 21,900</div>
 
@@ -157,7 +158,7 @@ export default class Items extends Component {
 
                         <div className="flex flex-col shadow-md">
 
-                            <div className="bg-gray-50 h-36 rounded-t-md"></div>
+                            <div className="bg-white h-36 rounded-t-md"></div>
 
                             <div className="bg-tangerine text-white text-center rounded-b-md py-1">Ksh 21,900</div>
 
@@ -165,7 +166,7 @@ export default class Items extends Component {
 
                         <div className="flex flex-col shadow-md">
 
-                            <div className="bg-gray-50 h-36 rounded-t-md"></div>
+                            <div className="bg-white h-36 rounded-t-md"></div>
 
                             <div className="bg-tangerine text-white text-center rounded-b-md py-1">Ksh 21,900</div>
 
@@ -173,7 +174,7 @@ export default class Items extends Component {
 
                         <div className="flex flex-col shadow-md">
 
-                            <div className="bg-gray-50 h-36 rounded-t-md"></div>
+                            <div className="bg-white h-36 rounded-t-md"></div>
 
                             <div className="bg-tangerine text-white text-center rounded-b-md py-1">Ksh 21,900</div>
 
@@ -181,7 +182,7 @@ export default class Items extends Component {
 
                         <div className="flex flex-col shadow-md">
 
-                            <div className="bg-gray-50 h-36 rounded-t-md"></div>
+                            <div className="bg-white h-36 rounded-t-md"></div>
 
                             <div className="bg-tangerine text-white text-center rounded-b-md py-1">Ksh 21,900</div>
 
@@ -189,7 +190,7 @@ export default class Items extends Component {
 
                         <div className="flex flex-col shadow-md">
 
-                            <div className="bg-gray-50 h-36 rounded-t-md"></div>
+                            <div className="bg-white h-36 rounded-t-md"></div>
 
                             <div className="bg-tangerine text-white text-center rounded-b-md py-1">Ksh 21,900</div>
 
