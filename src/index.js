@@ -13,6 +13,8 @@ import ItemInStock from './pages/ItemInStock';
 import ItemInTransit from './pages/ItemInTransit';
 import RequestItem from './pages/RequestItem';
 import Forum from './pages/Forum';
+import Sales from './pages/Sales';
+import Order from './pages/Order';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -26,6 +28,8 @@ ReactDOM.render(
         <Route exact path="/items/in-transit" component={ItemInTransit} />
         <Route exact path="/request-item" component={RequestItem} />
         <Route exact path="/forum" component={Forum} />
+        <Route exact path="/sales" component={Sales} />
+        <Route exact path="/order" component={Order} />
       </Switch>
     </Router>
   </React.StrictMode>,
