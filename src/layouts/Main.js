@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import logo from './img/logo.png'
+import logo from './img/logo.png';
+import AuthModal from './../modals/Auth';
 
 class Main extends Component {
 
@@ -10,13 +11,17 @@ class Main extends Component {
     
         this.state = {
 
-
+            show_auth_modal: false
              
         }
 
     }
+
+    toggleAuthModal = () => this.setState({ show_auth_modal: !this.state.show_auth_modal });
     
     render() {
+
+        const { show_auth_modal } = this.state;
 
         return (
 
@@ -62,13 +67,13 @@ class Main extends Component {
 
                             </Link>
 
-                            <Link to="/account" className="text-tangerine bg-white rounded shadow-sm p-1">
+                            <button className="text-tangerine bg-white rounded shadow-sm p-1" onClick={() => this.toggleAuthModal()}>
 
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                                 </svg>
 
-                            </Link>
+                            </button>
 
                         </div>
 
@@ -95,6 +100,8 @@ class Main extends Component {
                     <p className="text-gray-600 font-bold">Litudian &copy; 2021</p>
 
                 </div>
+
+                <AuthModal logo={logo} show={show_auth_modal} toggle={this.toggleAuthModal} />
                 
             </div>
 
