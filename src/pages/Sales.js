@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Calendar from 'react-calendar';
 import Layout from './../layouts/Main';
 
 export default class Sales extends Component {
@@ -34,6 +35,14 @@ export default class Sales extends Component {
                             <p className="text-tangerine uppercase font-bold text-sm">Items Sold <span className="text-gray-900">: 15</span></p>
 
                             <p className="text-tangerine uppercase font-bold text-sm">Profit <span className="text-gray-900 capitalize">: Ksh 24,000</span></p>
+
+                        </div>
+
+                        <h1 className="text-tangerine font-bold uppercase">Calender</h1>
+
+                        <div className="bg-white rounded p-1 shadow">
+
+                            <Calendar className="font-bold text-gray-900 gap-x-1 bg-white" />
 
                         </div>
 
@@ -85,37 +94,9 @@ export default class Sales extends Component {
 
                                     <tr className="text-xs font-bold py-1">
 
-                                        <td className="py-3">
+                                        <td className="py-3 border-l-4 mt-1 mr-2 border-tangerine">
 
-                                            <h1>Ronald Ngala Shop</h1>
-
-                                        </td>
-
-                                        <td className="py-3">
-
-                                            <p className="text-gray-400">Charles Dawrin Doe</p>
-
-                                        </td>
-
-                                        <td className="py-3">
-
-                                            <p className="text-gray-400">12:10 :<span className="text-litudian-orange">1 Air Max</span></p>
-
-                                        </td>
-
-                                        <td className="py-3">
-
-                                            <p className="text-tangerine">Ksh 1,200</p>
-
-                                        </td>
-
-                                    </tr>
-
-                                    <tr className="text-xs font-bold py-1">
-
-                                        <td className="py-3">
-
-                                            <h1>Ronald Ngala Shop</h1>
+                                            <h1 className="px-2">Ronald Ngala Shop</h1>
 
                                         </td>
 
@@ -141,37 +122,9 @@ export default class Sales extends Component {
 
                                     <tr className="text-xs font-bold py-1">
 
-                                        <td className="py-3">
+                                        <td className="py-3 border-l-4 mt-1 mr-2 border-tangerine">
 
-                                            <h1>Ronald Ngala Shop</h1>
-
-                                        </td>
-
-                                        <td className="py-3">
-
-                                            <p className="text-gray-400">Charles Dawrin Doe</p>
-
-                                        </td>
-
-                                        <td className="py-3">
-
-                                            <p className="text-gray-400">12:10 :<span className="text-litudian-orange">1 Air Max</span></p>
-
-                                        </td>
-
-                                        <td className="py-3">
-
-                                            <p className="text-tangerine">Ksh 1,200</p>
-
-                                        </td>
-
-                                    </tr>
-
-                                    <tr className="text-xs font-bold py-1">
-
-                                        <td className="py-3">
-
-                                            <h1>Ronald Ngala Shop</h1>
+                                            <h1 className="px-2">Ronald Ngala Shop</h1>
 
                                         </td>
 
@@ -197,37 +150,9 @@ export default class Sales extends Component {
 
                                     <tr className="text-xs font-bold py-1">
 
-                                        <td className="py-3">
+                                        <td className="py-3 border-l-4 mt-1 mr-2 border-tangerine">
 
-                                            <h1>Ronald Ngala Shop</h1>
-
-                                        </td>
-
-                                        <td className="py-3">
-
-                                            <p className="text-gray-400">Charles Dawrin Doe</p>
-
-                                        </td>
-
-                                        <td className="py-3">
-
-                                            <p className="text-gray-400">12:10 :<span className="text-litudian-orange">1 Air Max</span></p>
-
-                                        </td>
-
-                                        <td className="py-3">
-
-                                            <p className="text-tangerine">Ksh 1,200</p>
-
-                                        </td>
-
-                                    </tr>
-
-                                    <tr className="text-xs font-bold py-1">
-
-                                        <td className="py-3">
-
-                                            <h1>Ronald Ngala Shop</h1>
+                                            <h1 className="px-2">Ronald Ngala Shop</h1>
 
                                         </td>
 
@@ -253,9 +178,9 @@ export default class Sales extends Component {
 
                                     <tr className="text-xs font-bold py-1">
 
-                                        <td className="py-3">
+                                        <td className="py-3 border-l-4 mt-1 mr-2 border-tangerine">
 
-                                            <h1>Ronald Ngala Shop</h1>
+                                            <h1 className="px-2">Ronald Ngala Shop</h1>
 
                                         </td>
 
@@ -281,9 +206,93 @@ export default class Sales extends Component {
 
                                     <tr className="text-xs font-bold py-1">
 
+                                        <td className="py-3 border-l-4 mt-1 mr-2 border-tangerine">
+
+                                            <h1 className="px-2">Ronald Ngala Shop</h1>
+
+                                        </td>
+
                                         <td className="py-3">
 
-                                            <h1>Ronald Ngala Shop</h1>
+                                            <p className="text-gray-400">Charles Dawrin Doe</p>
+
+                                        </td>
+
+                                        <td className="py-3">
+
+                                            <p className="text-gray-400">12:10 :<span className="text-litudian-orange">1 Air Max</span></p>
+
+                                        </td>
+
+                                        <td className="py-3">
+
+                                            <p className="text-tangerine">Ksh 1,200</p>
+
+                                        </td>
+
+                                    </tr>
+
+                                    <tr className="text-xs font-bold py-1">
+
+                                        <td className="py-3 border-l-4 mt-1 mr-2 border-tangerine">
+
+                                            <h1 className="px-2">Ronald Ngala Shop</h1>
+
+                                        </td>
+
+                                        <td className="py-3">
+
+                                            <p className="text-gray-400">Charles Dawrin Doe</p>
+
+                                        </td>
+
+                                        <td className="py-3">
+
+                                            <p className="text-gray-400">12:10 :<span className="text-litudian-orange">1 Air Max</span></p>
+
+                                        </td>
+
+                                        <td className="py-3">
+
+                                            <p className="text-tangerine">Ksh 1,200</p>
+
+                                        </td>
+
+                                    </tr>
+
+                                    <tr className="text-xs font-bold py-1">
+
+                                        <td className="py-3 border-l-4 mt-1 mr-2 border-tangerine">
+
+                                            <h1 className="px-2">Ronald Ngala Shop</h1>
+
+                                        </td>
+
+                                        <td className="py-3">
+
+                                            <p className="text-gray-400">Charles Dawrin Doe</p>
+
+                                        </td>
+
+                                        <td className="py-3">
+
+                                            <p className="text-gray-400">12:10 :<span className="text-litudian-orange">1 Air Max</span></p>
+
+                                        </td>
+
+                                        <td className="py-3">
+
+                                            <p className="text-tangerine">Ksh 1,200</p>
+
+                                        </td>
+
+                                    </tr>
+
+                                    <tr className="text-xs font-bold py-1">
+
+                                        <td className="py-3 border-l-4 mt-1 mr-2 border-tangerine">
+
+                                            <h1 className="px-2">Ronald Ngala Shop</h1>
 
                                         </td>
 
