@@ -30,7 +30,7 @@ export default class Items extends Component {
 
                 </div>
 
-                <div className="grid grid-cols-2 gap-4 py-5">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 py-5">
 
                     <div className="bg-white rounded w-full flex flex-col px-4 py-5 shadow-sm">
 
@@ -138,7 +138,7 @@ export default class Items extends Component {
 
                     <h1 className="text-tangerine font-bold uppercase">Other Products</h1>
 
-                    <div className="grid grid-cols-6 gap-4 py-5">
+                    <div className="grid grid-cols-1 md:grid-cols-6 gap-4 py-5">
 
                         <div className="flex flex-col shadow-md">
 

@@ -30,9 +30,9 @@ export default class ItemInTransit extends Component {
 
                 </div>
 
-                <div className="flex flex-row bg-white rounded-md shadow-md my-5 p-4 gap-x-3">
+                <div className="flex flex-col md:flex-row bg-white rounded-md shadow-md my-5 p-4 gap-x-3">
 
-                    <div className="flex-1 flex flex-col gap-y-3 px-3">
+                    <div className="md:flex-1 flex flex-col gap-y-3 px-3">
 
                         <h1 className="text-2xl text-tangerine font-bold uppercase">Air Max</h1>
 
@@ -40,7 +40,7 @@ export default class ItemInTransit extends Component {
 
                     </div>
 
-                    <div className="flex-1 flex flex-col">
+                    <div className="md:flex-1 flex flex-col">
 
                         <h1 className="text-bold text-gray-900 uppercase font-extrabold">25 Items Ordered</h1>
 
