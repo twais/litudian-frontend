@@ -21,7 +21,7 @@ export default class Forum extends Component {
 
             <Layout>
 
-                <div className="grid grid-cols-4 gap-x-3 py-5">
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-y-5 md:gap-y-0 md:gap-x-3 py-5">
 
                     <div className="flex flex-col">
                         

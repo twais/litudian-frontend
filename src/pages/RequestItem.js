@@ -21,9 +21,9 @@ export default class RequestItem extends Component {
 
             <Layout>
 
-                <div className="flex flex-row gap-y-5 py-5 gap-x-12">
+                <div className="flex flex-col md:flex-row gap-y-5 py-5 gap-x-12">
 
-                    <div className="flex flex-2 flex-col gap-y-6">
+                    <div className="flex md:flex-2 flex-col gap-y-6">
 
                         <h2 className="text-tangerine uppercase font-extrabold">Request Item</h2>
 
@@ -35,7 +35,7 @@ export default class RequestItem extends Component {
 
                     </div>
 
-                    <div className="flex flex-1 flex-col">
+                    <div className="flex md:flex-1 flex-col">
 
                         <div className="flex flex-col gap-y-3 mt-10">
 
@@ -49,7 +49,7 @@ export default class RequestItem extends Component {
 
                     </div>
 
-                    <div className="flex flex-1 flex-col">
+                    <div className="flex md:flex-1 flex-col">
 
                         <div className="flex flex-row justify-between items-center">
 

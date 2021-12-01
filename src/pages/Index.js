@@ -22,9 +22,9 @@ export default class Index extends Component {
 
             <Layout>
 
-                <div className="grid grid-cols-4 gap-4 py-5">
+                <div className="grid grid-cols-1 md:grid-cols-4 md:gap-4 py-5">
 
-                    <div className="flex flex-col">
+                    <div className="hidden md:flex flex-col">
                         
                         <h1 className="text-tangerine font-bold">Categories</h1>
 
@@ -38,7 +38,7 @@ export default class Index extends Component {
 
                     </div>
 
-                    <div className="flex flex-col">
+                    <div className="hidden md:flex flex-col">
                         
                         <h1 className="text-tangerine font-bold">Recent Searches</h1>
 
@@ -52,7 +52,7 @@ export default class Index extends Component {
 
                 </div>
 
-                <div className="grid grid-cols-2 gap-4 py-5">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 py-5">
 
                     <div className="bg-white rounded w-full flex flex-col px-4 py-5 shadow-sm">
 
@@ -160,7 +160,7 @@ export default class Index extends Component {
 
                     <h1 className="text-tangerine font-bold uppercase">Other Products</h1>
 
-                    <div className="grid grid-cols-6 gap-4 py-5">
+                    <div className="grid grid-cols-1 md:grid-cols-6 gap-y-4 md:gap-4 py-5">
 
                         <div className="flex flex-col shadow-md">
 
