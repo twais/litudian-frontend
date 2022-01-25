@@ -21,9 +21,9 @@ export default class Profile extends Component {
 
             <Layout>
 
-                <div className="flex flex-col md:flex-row gap-y-5 py-5 gap-x-12">
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-y-4 py-5 gap-x-12">
 
-                    <div className="flex md:flex-2 flex-col gap-y-6 w-full">
+                    <div className="flex flex-col gap-y-6 w-full">
 
                         <h2 className="text-tangerine uppercase font-extrabold">Request Item</h2>
 
@@ -43,7 +43,7 @@ export default class Profile extends Component {
 
                     </div>
 
-                    <div className="flex md:flex-1 flex-col">
+                    <div className="flex flex-col w-full md:col-span-2">
 
                         <div className="flex flex-col gap-y-3 mt-10">
 
@@ -75,7 +75,7 @@ export default class Profile extends Component {
 
                     </div>
 
-                    <div className="flex md:flex-1 flex-col">
+                    <div className="flex flex-col">
 
                         <div className="flex flex-row justify-between items-center">
 
@@ -95,7 +95,7 @@ export default class Profile extends Component {
 
                         <div className="flex flex-row w-full bg-white mt-4 rounded-md">
 
-                            <div className="w-24 h-24 bg-gray-400 rounded-l-md"></div>
+                            <div className="w-24 h-full bg-gray-400 rounded-l-md"></div>
 
                             <div className="flex flex-col px-3 justify-center">
 
@@ -111,7 +111,7 @@ export default class Profile extends Component {
 
                         <div className="flex flex-row w-full bg-white mt-4 rounded-md">
 
-                            <div className="w-24 h-24 bg-gray-400 rounded-l-md"></div>
+                            <div className="w-24 h-full bg-gray-400 rounded-l-md"></div>
 
                             <div className="flex flex-col px-3 justify-center">
 
@@ -127,7 +127,7 @@ export default class Profile extends Component {
 
                         <div className="flex flex-row w-full bg-white mt-4 rounded-md">
 
-                            <div className="w-24 h-24 bg-gray-400 rounded-l-md"></div>
+                            <div className="w-24 h-full bg-gray-400 rounded-l-md"></div>
 
                             <div className="flex flex-col px-3 justify-center">
 
