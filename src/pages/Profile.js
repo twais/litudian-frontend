@@ -27,13 +27,13 @@ export default class Profile extends Component {
 
                         <h2 className="text-tangerine uppercase font-extrabold">Request Item</h2>
 
-                        <div className="w-48 h-48 bg-gray-400 rounded-md flex flex-col justify-center items-center shadow">
+                        <div className="w-full h-48 bg-gray-400 rounded-md flex flex-col justify-center items-center shadow">
 
                             <h2 className="text-gray-50 uppercase font-bold text-center">Click To Change Photo</h2>
 
                         </div>
 
-                        <div className="flex flex-col bg-white w-48 py-5 justify-center items-end px-5 shadow rounded-md">
+                        <div className="flex flex-col bg-white w-full py-5 justify-center items-end px-5 shadow rounded-md">
 
                             <h2 className="text-gray-800 uppercase font-bold text-xl text-right">Your <br />Litupoints</h2>
 
@@ -97,11 +97,11 @@ export default class Profile extends Component {
 
                             <div className="w-24 h-full bg-gray-400 rounded-l-md"></div>
 
-                            <div className="flex flex-col px-3 justify-center">
+                            <div className="flex flex-col px-3 justify-center py-3 gap-y-1">
 
                                 <h2 className="text-tangerine uppercase font-bold">Town Shop</h2>
 
-                                <h2 className="text-gray-700 uppercase font-extrabold">Tom Mboya St.</h2>
+                                <h2 className="text-gray-700 uppercase font-extrabold text-xs">Tom Mboya St.</h2>
 
                                 <p className="text-gray-400 text-xs font-bold">0707 000 990</p>
 
@@ -113,11 +113,11 @@ export default class Profile extends Component {
 
                             <div className="w-24 h-full bg-gray-400 rounded-l-md"></div>
 
-                            <div className="flex flex-col px-3 justify-center">
+                            <div className="flex flex-col px-3 justify-center py-3 gap-y-1">
 
                                 <h2 className="text-tangerine uppercase font-bold">Town Shop</h2>
 
-                                <h2 className="text-gray-700 uppercase font-extrabold">Tom Mboya St.</h2>
+                                <h2 className="text-gray-700 uppercase font-extrabold text-xs">Tom Mboya St.</h2>
 
                                 <p className="text-gray-400 text-xs font-bold">0707 000 990</p>
 
@@ -129,11 +129,11 @@ export default class Profile extends Component {
 
                             <div className="w-24 h-full bg-gray-400 rounded-l-md"></div>
 
-                            <div className="flex flex-col px-3 justify-center">
+                            <div className="flex flex-col px-3 justify-center py-3 gap-y-1">
 
                                 <h2 className="text-tangerine uppercase font-bold">Town Shop</h2>
 
-                                <h2 className="text-gray-700 uppercase font-extrabold">Tom Mboya St.</h2>
+                                <h2 className="text-gray-700 uppercase font-extrabold text-xs">Tom Mboya St.</h2>
 
                                 <p className="text-gray-400 text-xs font-bold">0707 000 990</p>
 
