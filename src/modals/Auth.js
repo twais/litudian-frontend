@@ -1,5 +1,9 @@
 import React, { Component, Fragment } from 'react';
 import { Dialog, Transition, Tab } from '@headlessui/react';
+import { toast } from 'react-toastify';
+// import { Formik } from 'formik';
+import instance from './../utils/instance';
+// import LoginSchema from './../validation/login';
 
 class Auth extends Component {
 
@@ -9,7 +13,19 @@ class Auth extends Component {
     
         this.state = {
 
+            msisdn: '',
 
+            password: '',
+
+            loading: false,
+
+            first_name: '',
+
+            last_name: '',
+
+            email: '',
+
+            confirm_password: ''
              
         }
 
@@ -20,10 +36,78 @@ class Auth extends Component {
         return classes.filter(Boolean).join(' ');
 
     }
+
+    handleChange = e => this.setState({ [e.target.name]: e.target.value });
+
+    // handleChange = e => {
+
+    //     console.log(e.target.name);
+
+    // }
+
+    login = async () => {
+
+        try {
+
+            const { msisdn, password } = this.state;
+
+            // email.toLowerCase();
+
+            let response = await instance.post('login', { msisdn, password });
+
+            console.log(response);
+
+            toast(`You have logged in successfully`);
+            
+        } catch (error) {
+
+            console.log(error);
+
+            if(error.response) {
+
+                console.log(JSON.stringify(error.response));
+
+            }
+
+            toast('Invalid login credentials');
+            
+        }
+
+    }
+
+    register = async () => {
+
+        try {
+
+            const { first_name, last_name, email, msisdn, password, confirm_password } = this.state;
+
+            // email.toLowerCase();
+
+            let response = await instance.post('register', { first_name, last_name, email, msisdn, password, confirm_password });
+
+            console.log(response);
+
+            toast(`You have registered in successfully !`);
+            
+        } catch (error) {
+
+            console.log(error);
+
+            if(error.response) {
+
+                console.log(JSON.stringify(error.response));
+
+            }
+
+            toast('An error occurred, please try again later !');
+            
+        }
+
+    }
     
     render() {
 
-        const { show, toggle, logo } = this.props;
+        const { show, toggle, logo, loading } = this.props;
 
         return (
 
@@ -96,68 +180,80 @@ class Auth extends Component {
 
                                     <Tab.Panels className="mt-0">
 
-                                        <Tab.Panel
+                                        <form onSubmit={(e) => {e.preventDefault();this.login();}}>
 
-                                            key="login"
+                                            <Tab.Panel
 
-                                            className={this.classNames('bg-tangerine rounded-xl py-10 flex flex-col px-20 gap-y-5')}
+                                                key="login"
 
-                                        >
+                                                className={this.classNames('bg-tangerine rounded-xl py-10 flex flex-col px-20 gap-y-5')}
 
-                                            <input type="email" placeholder="Email" className="py-2 px-7 placeholder-gray-400 font-bold shadow-sm rounded-md focus:outline-none uppercase text-center" />
+                                            >
 
-                                            <input type="password" placeholder="Password" className="py-2 px-7 placeholder-gray-400 font-bold shadow-sm rounded-md focus:outline-none uppercase text-center" />
+                                                <input name="msisdn" type="text" placeholder="Phone Number" className="py-2 px-7 placeholder-gray-400 font-bold shadow-sm rounded-md focus:outline-none uppercase text-center" onChange={this.handleChange} value={this.state.msisdn} />
 
-                                            <button className="bg-litudian-orange text-white w-full py-2 font-bold rounded-md uppercase">Login</button>
+                                                <input name="password" type="password" placeholder="Password" className="py-2 px-7 placeholder-gray-400 font-bold shadow-sm rounded-md focus:outline-none uppercase text-center" onChange={this.handleChange} value={this.state.password} />
 
-                                            <p className="text-white capitalize text-center">By clicking LOGIN you agree with our terms of service stipulated <span className="text-litudian-orange">HERE</span></p>
+                                                <button className="bg-litudian-orange text-white w-full py-2 font-bold rounded-md uppercase" type="submit">{loading ? 'Waiting ...' : 'Login'}</button>
 
-                                            <h2 className="font-bold text-gray-900 text-center uppercase">Quick Access</h2>
+                                                <p className="text-white capitalize text-center">By clicking LOGIN you agree with our terms of service stipulated <span className="text-litudian-orange">HERE</span></p>
 
-                                            <div className="flex flex-row justify-between items-center">
+                                                <h2 className="font-bold text-gray-900 text-center uppercase">Quick Access</h2>
 
-                                                <div className="h-12 w-12 bg-litudian-orange rounded-md shadow"></div>
+                                                <div className="flex flex-row justify-between items-center">
 
-                                                <div className="h-12 w-12 bg-litudian-orange rounded-md shadow"></div>
+                                                    <div className="h-12 w-12 bg-litudian-orange rounded-md shadow"></div>
 
-                                                <div className="h-12 w-12 bg-litudian-orange rounded-md shadow"></div>
+                                                    <div className="h-12 w-12 bg-litudian-orange rounded-md shadow"></div>
 
-                                            </div>
+                                                    <div className="h-12 w-12 bg-litudian-orange rounded-md shadow"></div>
 
-                                        </Tab.Panel>
+                                                </div>
 
-                                        <Tab.Panel
+                                            </Tab.Panel>
 
-                                            key="register"
+                                        </form>
 
-                                            className={this.classNames('bg-tangerine rounded-xl py-10 flex flex-col px-20 gap-y-5')}
+                                        <form onSubmit={(e) => {e.preventDefault();this.register();}}>
 
-                                        >
-                                            <input type="text" placeholder="First Name" className="py-2 px-7 placeholder-gray-400 font-bold shadow-sm rounded-md focus:outline-none uppercase text-center" />
+                                            <Tab.Panel
 
-                                            <input type="text" placeholder="Last Name" className="py-2 px-7 placeholder-gray-400 font-bold shadow-sm rounded-md focus:outline-none uppercase text-center" />
+                                                key="register"
 
-                                            <input type="email" placeholder="Email" className="py-2 px-7 placeholder-gray-400 font-bold shadow-sm rounded-md focus:outline-none uppercase text-center" />
+                                                className={this.classNames('bg-tangerine rounded-xl py-10 flex flex-col px-20 gap-y-5')}
 
-                                            <input type="password" placeholder="Password" className="py-2 px-7 placeholder-gray-400 font-bold shadow-sm rounded-md focus:outline-none uppercase text-center" />
+                                            >
+                                                <input name="first_name" type="text" placeholder="First Name" className="py-2 px-7 placeholder-gray-400 font-bold shadow-sm rounded-md focus:outline-none uppercase text-center" onChange={this.handleChange} value={this.state.first_name} />
 
-                                            <button className="bg-litudian-orange text-white w-full py-2 font-bold rounded-md uppercase">Create Account</button>
+                                                <input name="last_name" type="text" placeholder="Last Name" className="py-2 px-7 placeholder-gray-400 font-bold shadow-sm rounded-md focus:outline-none uppercase text-center" onChange={this.handleChange} value={this.state.last_name} />
 
-                                            <p className="text-white capitalize text-center">By clicking LOGIN you agree with our terms of service stipulated <span className="text-litudian-orange">HERE</span></p>
+                                                <input name='email' type="email" placeholder="Email" className="py-2 px-7 placeholder-gray-400 font-bold shadow-sm rounded-md focus:outline-none uppercase text-center" onChange={this.handleChange} value={this.state.email} />
 
-                                            <h2 className="font-bold text-gray-900 text-center uppercase">Quick Signup</h2>
+                                                <input name="msisdn" type="text" placeholder="Phone Number" className="py-2 px-7 placeholder-gray-400 font-bold shadow-sm rounded-md focus:outline-none uppercase text-center" onChange={this.handleChange} value={this.state.msisdn} />
 
-                                            <div className="flex flex-row justify-between items-center">
+                                                <input name="password" type="password" placeholder="Password" className="py-2 px-7 placeholder-gray-400 font-bold shadow-sm rounded-md focus:outline-none uppercase text-center" onChange={this.handleChange} value={this.state.password} />
 
-                                                <div className="h-12 w-12 bg-litudian-orange rounded-md shadow"></div>
+                                                <input name="confirm_pasword" type="password" placeholder="Confirm Password" className="py-2 px-7 placeholder-gray-400 font-bold shadow-sm rounded-md focus:outline-none uppercase text-center" onChange={this.handleChange} value={this.state.confirm_password} />
 
-                                                <div className="h-12 w-12 bg-litudian-orange rounded-md shadow"></div>
+                                                <button className="bg-litudian-orange text-white w-full py-2 font-bold rounded-md uppercase" type="submit">Create Account</button>
 
-                                                <div className="h-12 w-12 bg-litudian-orange rounded-md shadow"></div>
+                                                <p className="text-white capitalize text-center">By clicking LOGIN you agree with our terms of service stipulated <span className="text-litudian-orange">HERE</span></p>
 
-                                            </div>
+                                                <h2 className="font-bold text-gray-900 text-center uppercase">Quick Signup</h2>
 
-                                        </Tab.Panel>
+                                                <div className="flex flex-row justify-between items-center">
+
+                                                    <div className="h-12 w-12 bg-litudian-orange rounded-md shadow"></div>
+
+                                                    <div className="h-12 w-12 bg-litudian-orange rounded-md shadow"></div>
+
+                                                    <div className="h-12 w-12 bg-litudian-orange rounded-md shadow"></div>
+
+                                                </div>
+
+                                            </Tab.Panel>
+
+                                        </form>
 
                                     </Tab.Panels>
 

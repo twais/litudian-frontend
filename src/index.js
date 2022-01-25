@@ -3,6 +3,10 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { Provider } from 'react-redux';
+import store from './store/Index';
 
 // components
 import Profile from './pages/Profile';
@@ -18,20 +22,23 @@ import Order from './pages/Order';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
-      <Switch>
-        <Route exact path="/" component={Index} />
-        <Route exact path="/profile" component={Profile} />
-        <Route exact path="/account" component={Account} />
-        <Route exact path="/items" component={Items} />
-        <Route exact path="/items/in-stock" component={ItemInStock} />
-        <Route exact path="/items/in-transit" component={ItemInTransit} />
-        <Route exact path="/request-item" component={RequestItem} />
-        <Route exact path="/forum" component={Forum} />
-        <Route exact path="/sales" component={Sales} />
-        <Route exact path="/order" component={Order} />
-      </Switch>
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <Switch>
+          <Route exact path="/" component={Index} />
+          <Route exact path="/profile" component={Profile} />
+          <Route exact path="/account" component={Account} />
+          <Route exact path="/items" component={Items} />
+          <Route exact path="/items/in-stock" component={ItemInStock} />
+          <Route exact path="/items/in-transit" component={ItemInTransit} />
+          <Route exact path="/request-item" component={RequestItem} />
+          <Route exact path="/forum" component={Forum} />
+          <Route exact path="/sales" component={Sales} />
+          <Route exact path="/order" component={Order} />
+        </Switch>
+      </Router>
+      <ToastContainer />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
