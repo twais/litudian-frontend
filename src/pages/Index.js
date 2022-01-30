@@ -4,6 +4,8 @@ import Layout from './../layouts/Main';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getCategories } from './../store/actions/CategoryActions';
+import CategoryMOQsCard from './../components/CategoryMOQsCard';
+import { Link } from 'react-router-dom';
 
 class Index extends Component {
 
@@ -40,12 +42,16 @@ class Index extends Component {
                         <h1 className="text-tangerine font-bold">Categories</h1>
 
                         {list.map((category, i) => 
+
+                            <Link key={i} to={`/categories/${category.id}`}>
                         
-                            <div key={i} className="bg-white w-full h-20 mt-2 rounded-md px-10 shadow-sm flex flex-col justify-center cursor-pointer">
+                                <div key={i} className="bg-white w-full h-20 mt-2 rounded-md px-10 shadow-sm flex flex-col justify-center cursor-pointer">
 
-                                <p className='font-bold capitalize text-lg text-gray-500'>{category.name.toLowerCase()}</p>
+                                    <p className='font-bold capitalize text-lg text-gray-500'>{category.name.toLowerCase()}</p>
 
-                            </div>
+                                </div>
+
+                            </Link>
                             
                         )}
                         
@@ -74,56 +80,8 @@ class Index extends Component {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 py-5">
 
                     {data.map((category, i) => 
-                    
-                        <div key={i} className="bg-white rounded w-full flex flex-col px-4 py-5 shadow-sm">
 
-                            <div className="flex flex-row justify-between">
-
-                                <h1 className="text-tangerine font-bold uppercase text-sm">{category.name}</h1>
-
-                                <h1 className="text-black font-bold">see more</h1>
-
-                            </div>
-
-                            {/* <div className="flex flex-row justify-start gap-x-1 py-1">
-
-                                <span className="bg-litudian-orange text-gray-50 font-bold px-4 rounded-lg text-xs py-1">Leather</span>
-
-                                <span className="bg-litudian-orange text-gray-50 font-bold px-4 rounded-lg text-xs py-1">Cloth</span>
-
-                                <span className="bg-litudian-orange text-gray-50 font-bold px-4 rounded-lg text-xs py-1">Rexin</span>
-
-                            </div> */}
-
-                            <div className="grid grid-cols-3 gap-4 py-5">
-
-                                <div className="flex flex-col">
-
-                                    <div className="bg-gray-100 h-36 rounded-t-md"></div>
-
-                                    <div className="bg-tangerine text-white text-center rounded-b-md py-1">Ksh 21,900</div>
-
-                                </div>
-
-                                <div className="flex flex-col">
-
-                                    <div className="bg-gray-100 h-36 rounded-t-md"></div>
-
-                                    <div className="bg-tangerine text-white text-center rounded-b-md py-1">Ksh 21,900</div>
-
-                                </div>
-
-                                <div className="flex flex-col">
-
-                                    <div className="bg-gray-100 h-36 rounded-t-md"></div>
-
-                                    <div className="bg-tangerine text-white text-center rounded-b-md py-1">Ksh 21,900</div>
-
-                                </div>
-
-                            </div>
-
-                        </div>
+                        <CategoryMOQsCard key={i} category={category} />
                     
                     )}
 

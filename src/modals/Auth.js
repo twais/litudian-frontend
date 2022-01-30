@@ -3,6 +3,7 @@ import { Dialog, Transition, Tab } from '@headlessui/react';
 import { toast } from 'react-toastify';
 // import { Formik } from 'formik';
 import instance from './../utils/instance';
+import axios from 'axios';
 // import LoginSchema from './../validation/login';
 
 class Auth extends Component {
@@ -49,11 +50,41 @@ class Auth extends Component {
 
         try {
 
+            const fetch = axios.create({
+
+                baseURL: 'https://api.litudian.com/api/v1/',
+
+                timeout: 10000,
+
+                headers: {
+
+                    "Content-Type": "application/json",
+
+                    'Access-Control-Allow-Origin': '*',
+
+                }
+
+            });
+
             const { msisdn, password } = this.state;
 
             // email.toLowerCase();
 
-            let response = await instance.post('login', { msisdn, password });
+            console.log({ msisdn, password });
+
+            // let config = {
+
+            //     headers: {
+
+            //         "Content-Type": "application/json",
+
+            //         'Access-Control-Allow-Origin': '*',
+
+            //     }
+
+            // };
+
+            let response = await fetch.post('login', { msisdn, password });
 
             console.log(response);
 
