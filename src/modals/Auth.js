@@ -3,8 +3,10 @@ import { Dialog, Transition, Tab } from '@headlessui/react';
 import { toast } from 'react-toastify';
 // import { Formik } from 'formik';
 import instance from './../utils/instance';
-import axios from 'axios';
+// import axios from 'axios';
 // import LoginSchema from './../validation/login';
+
+// const token = localStorage.getItem('ltdn');
 
 class Auth extends Component {
 
@@ -50,21 +52,23 @@ class Auth extends Component {
 
         try {
 
-            const fetch = axios.create({
+            // const fetch = axios.create({
 
-                baseURL: 'https://api.litudian.com/api/v1/',
+            //     baseURL: 'https://api.litudian.com/api/v1/',
 
-                timeout: 10000,
+            //     timeout: 10000,
 
-                headers: {
+            //     headers: {
 
-                    "Content-Type": "application/json",
+            //         "Content-Type": "application/json",
 
-                    'Access-Control-Allow-Origin': '*',
+            //         'Access-Control-Allow-Origin': '*',
 
-                }
+            //         'Authorization': 'Bearer ' + token
 
-            });
+            //     }
+
+            // });
 
             const { msisdn, password } = this.state;
 
@@ -84,7 +88,7 @@ class Auth extends Component {
 
             // };
 
-            let response = await fetch.post('login', { msisdn, password });
+            let response = await instance.post('login', { msisdn, password });
 
             console.log(response);
 
@@ -111,6 +115,8 @@ class Auth extends Component {
         try {
 
             const { first_name, last_name, email, msisdn, password, confirm_password } = this.state;
+
+            // confirm_password = '1234';
 
             // email.toLowerCase();
 
@@ -264,7 +270,7 @@ class Auth extends Component {
 
                                                 <input name="password" type="password" placeholder="Password" className="py-2 px-7 placeholder-gray-400 font-bold shadow-sm rounded-md focus:outline-none uppercase text-center" onChange={this.handleChange} value={this.state.password} />
 
-                                                <input name="confirm_pasword" type="password" placeholder="Confirm Password" className="py-2 px-7 placeholder-gray-400 font-bold shadow-sm rounded-md focus:outline-none uppercase text-center" onChange={this.handleChange} value={this.state.confirm_password} />
+                                                <input name="confirm_password" type="password" placeholder="Confirm Password" className="py-2 px-7 placeholder-gray-400 font-bold shadow-sm rounded-md focus:outline-none uppercase text-center" onChange={this.handleChange} value={this.state.confirm_password} />
 
                                                 <button className="bg-litudian-orange text-white w-full py-2 font-bold rounded-md uppercase" type="submit">Create Account</button>
 

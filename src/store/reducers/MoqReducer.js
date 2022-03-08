@@ -1,8 +1,9 @@
-import { MOQS } from './../types/Index';
+import { MOQS, ALL_MOQS } from './../types/Index';
 
 const initialState = {
     data: [],
-    list: []
+    list: [],
+    moqs: []
 };
 
 export default function CategoryReducer(state = initialState, action) {
@@ -18,6 +19,16 @@ export default function CategoryReducer(state = initialState, action) {
                 data: action.payload,
 
                 list: action.payload.splice(0, 3)
+
+            };
+
+        case ALL_MOQS: 
+
+            return {
+
+                ...state,
+
+                moqs: action.payload,
 
             };
 

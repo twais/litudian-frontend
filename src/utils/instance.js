@@ -17,7 +17,7 @@ const token = localStorage.getItem('ltdn');
 if (token) {
 
     // Apply To Every Request
-    instance.defaults.headers.common['Authorization'] = 'Bearer ' + token + '';
+    instance.defaults.headers.common['Authorization'] = 'Bearer ' + token;
 
 } else {
 
