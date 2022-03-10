@@ -70,14 +70,22 @@ const CategoryMOQsCard = (props) => {
             <div className="grid grid-cols-3 gap-4 py-5">
 
                 {list.map((moq, i) => 
+
+                    <Link to={`/products/${moq?.id}`}>
                 
-                    <div key={i} className="flex flex-col">
+                        <div key={i} className="flex flex-col">
 
-                        <div className="bg-gray-100 h-36 rounded-t-md"></div>
+                            <div className="bg-gray-100 h-36 rounded-t-md">
 
-                        <div className="bg-tangerine text-white text-center rounded-b-md py-1 capitalize">{moq.supplier_currency} {moq.price}</div>
+                                <img className='h-36 object-contain w-full' src={moq?.product[0]?.images[0]} alt={moq.id} />
 
-                    </div>
+                            </div>
+
+                            <div className="bg-tangerine text-white text-center rounded-b-md py-1 capitalize">{moq.supplier_currency} {moq.price}</div>
+
+                        </div>
+
+                    </Link>
 
                 )}
 

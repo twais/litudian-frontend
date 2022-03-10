@@ -20,6 +20,7 @@ import Forum from './pages/Forum';
 import Sales from './pages/Sales';
 import Order from './pages/Order';
 import Categories from './pages/Categories';
+import MOQ from './pages/MOQ';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -37,6 +38,7 @@ ReactDOM.render(
           <Route exact path="/sales" component={Sales} />
           <Route exact path="/order" component={Order} />
           <Route exact path="/categories/:id" component={Categories} />
+          <Route exact path="/products/:id" component={MOQ} />
         </Switch>
       </Router>
       <ToastContainer />

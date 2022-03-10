@@ -1,9 +1,10 @@
-import { MOQS, ALL_MOQS } from './../types/Index';
+import { MOQS, ALL_MOQS, GET_MOQ } from './../types/Index';
 
 const initialState = {
     data: [],
     list: [],
-    moqs: []
+    moqs: [],
+    moq: null
 };
 
 export default function CategoryReducer(state = initialState, action) {
@@ -29,6 +30,16 @@ export default function CategoryReducer(state = initialState, action) {
                 ...state,
 
                 moqs: action.payload,
+
+            };
+
+        case GET_MOQ: 
+
+            return {
+
+                ...state,
+
+                moq: action.payload,
 
             };
 
