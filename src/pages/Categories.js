@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getCategoryById } from './../store/actions/CategoryActions';
 import { getMoqsByCategoryId } from './../store/actions/MoqActions';
+import Currency from 'react-currency-formatter';
 
 class Categories extends Component {
 
@@ -49,7 +50,7 @@ class Categories extends Component {
 
                                 <div className="bg-white h-36 rounded-t-md"></div>
 
-                                <div className="bg-tangerine text-white text-center rounded-b-md py-1 capitalize">{moq.supplier_currency} {moq.price}</div>
+                                <div className="bg-tangerine text-white text-center rounded-b-md py-1 capitalize">{typeof moq.price === "number" ? <Currency quantity={moq.price} currency="KES" /> : moq.price}</div>
 
                             </div>
                         

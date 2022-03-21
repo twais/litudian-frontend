@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { getMoqsByCategoryId } from './../store/actions/MoqActions';
 import instance from './../utils/instance';
 import { Link } from 'react-router-dom';
+import Currency from 'react-currency-formatter';
 
 const CategoryMOQsCard = (props) => {
 
@@ -81,7 +82,7 @@ const CategoryMOQsCard = (props) => {
 
                             </div>
 
-                            <div className="bg-tangerine text-white text-center rounded-b-md py-1 capitalize">{moq.supplier_currency} {moq.price}</div>
+                            <div className="bg-tangerine text-white text-center rounded-b-md py-1 capitalize">{typeof moq.price === "number" ? <Currency quantity={moq.price} currency="KES" /> : moq.price}</div>
 
                         </div>
 
