@@ -88,7 +88,7 @@ class Auth extends Component {
 
             // };
 
-            let response = await instance.post('login', { msisdn, password });
+            let response = await instance.post('users/login', { msisdn, password });
 
             console.log(response);
 
