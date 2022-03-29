@@ -1,12 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Dialog, Transition, Tab } from '@headlessui/react';
 import { toast } from 'react-toastify';
-// import { Formik } from 'formik';
 import instance from './../utils/instance';
-// import axios from 'axios';
-// import LoginSchema from './../validation/login';
-
-// const token = localStorage.getItem('ltdn');
 
 class Auth extends Component {
 
@@ -41,58 +36,30 @@ class Auth extends Component {
     }
 
     handleChange = e => this.setState({ [e.target.name]: e.target.value });
-
-    // handleChange = e => {
-
-    //     console.log(e.target.name);
-
-    // }
-
+    
     login = async () => {
 
         try {
 
-            // const fetch = axios.create({
-
-            //     baseURL: 'https://api.litudian.com/api/v1/',
-
-            //     timeout: 10000,
-
-            //     headers: {
-
-            //         "Content-Type": "application/json",
-
-            //         'Access-Control-Allow-Origin': '*',
-
-            //         'Authorization': 'Bearer ' + token
-
-            //     }
-
-            // });
-
             const { msisdn, password } = this.state;
 
-            // email.toLowerCase();
+            if (msisdn === '' || password === '') {
 
-            console.log({ msisdn, password });
+                return toast.error('Please fill all the fields !');
 
-            // let config = {
+            }
 
-            //     headers: {
+            let { data } = await instance.post('users/login', { msisdn, password });
 
-            //         "Content-Type": "application/json",
+            localStorage.setItem('ltdn', data.token); 
+            
+            localStorage.setItem('ltdn_uid', data.id);
+            
+            localStorage.setItem('ltdn_exp', Math.floor(Date.now() / 1000) + ((60 * 60) * 1));
 
-            //         'Access-Control-Allow-Origin': '*',
+            toast.success(`You have logged in successfully`);
 
-            //     }
-
-            // };
-
-            let response = await instance.post('users/login', { msisdn, password });
-
-            console.log(response);
-
-            toast(`You have logged in successfully`);
+            return window.location.href = '/';
             
         } catch (error) {
 
@@ -115,10 +82,6 @@ class Auth extends Component {
         try {
 
             const { first_name, last_name, email, msisdn, password, confirm_password } = this.state;
-
-            // confirm_password = '1234';
-
-            // email.toLowerCase();
 
             let response = await instance.post('register', { first_name, last_name, email, msisdn, password, confirm_password });
 

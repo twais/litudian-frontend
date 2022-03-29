@@ -33,8 +33,6 @@ class Items extends Component {
 
         let { categories: { data }, moqs: { moqs } } = this.props;
 
-        console.log(moqs);
-
         return (
 
             <Layout>

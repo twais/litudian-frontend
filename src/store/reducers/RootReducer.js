@@ -4,6 +4,7 @@ import  { combineReducers } from 'redux';
 import categories from './CategoryReducer';
 import moqs from './MoqReducer';
 import products from './ProductReducer';
+import user from './UserReducer';
 
 export default combineReducers({
 
@@ -11,6 +12,8 @@ export default combineReducers({
 
     moqs,
 
-    products
+    products,
+
+    user
 
 });

@@ -3,6 +3,14 @@ import { Link } from 'react-router-dom';
 import logo from './img/logo.png';
 import AuthModal from './../modals/Auth';
 import { Menu } from '@headlessui/react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { showUser } from './../store/actions/UserActions';
+import { toast } from 'react-toastify';
+
+const expiry = localStorage.getItem('ltdn_exp');
+const currentTime = Date.now() / 1000;
+const authenticated = expiry > currentTime;
 
 class Main extends Component {
 
@@ -14,6 +22,18 @@ class Main extends Component {
 
             show_auth_modal: false
              
+        }
+
+    }
+
+    componentDidMount = async () => {
+
+        if(authenticated) {
+
+            let uid = localStorage.getItem('ltdn_uid');
+
+            await this.props.showUser(uid);
+
         }
 
     }
@@ -36,7 +56,7 @@ class Main extends Component {
 
                         <ul className="hidden md:block">
 
-                            <li className="inline-block mx-3 font-bold text-tangerine"><Link to="/profile">My Profile</Link></li>
+                            {authenticated && <li className="inline-block mx-3 font-bold text-tangerine"><Link to="/profile">My Profile</Link></li>}
 
                             <li className="inline-block mx-3 font-bold text-tangerine"><Link to="/items">My Items</Link></li>
 
@@ -68,13 +88,33 @@ class Main extends Component {
 
                             </Link>
 
-                            <button className="text-tangerine bg-white rounded shadow-sm p-1" onClick={() => this.toggleAuthModal()}>
+                            {!authenticated && <button className="text-tangerine bg-white rounded shadow-sm p-1" onClick={() => this.toggleAuthModal()}>
 
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                                 </svg>
 
-                            </button>
+                            </button>}
+
+                            {authenticated && <button className="text-tangerine bg-white rounded shadow-sm p-1" onClick={() => {
+
+                                localStorage.removeItem('ltdn'); 
+                                            
+                                localStorage.removeItem('ltdn_uid');
+                                            
+                                localStorage.removeItem('ltdn_exp');
+
+                                toast.warning(`You are logged out !`);
+
+                                return window.location.href = '/';
+
+                            }}>
+
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                                </svg>
+
+                            </button>}
 
                         </div>
 
@@ -160,4 +200,20 @@ class Main extends Component {
 
 };
 
-export default Main;
+const mapStateToProps = (state) => {
+
+    return {
+
+        user: state.user
+
+    }
+
+};
+
+const mapDispatchToProps = (dispatch)  => { 
+
+    return bindActionCreators({ showUser }, dispatch);
+
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main);
