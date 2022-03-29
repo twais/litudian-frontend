@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import Layout from './../layouts/Main';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { showUser, updateUser } from './../store/actions/UserActions';
+import { toast } from 'react-toastify';
 
-export default class Profile extends Component {
+class Profile extends Component {
 
     constructor(props) {
 
@@ -9,13 +13,67 @@ export default class Profile extends Component {
     
         this.state = {
 
+            first_name: '',
 
+            last_name: '',
+
+            email: '',
+
+            msisdn: '',
+
+            username: ''
              
+        }
+
+    }
+
+    componentDidMount = async () => {
+
+        let uid = localStorage.getItem('ltdn_uid');
+
+        await this.props.showUser(uid);
+
+        this.setUserDetails();
+
+    }
+
+    handleChange = e => this.setState({ [e.target.name]: e.target.value });
+
+    setUserDetails = () => {
+
+        const { user: { details } } = this.props;
+
+        this.setState({ first_name: details.first_name, last_name: details.last_name, email: details.email, msisdn: details.msisdn, username: details.username });
+
+    };
+
+    update = async () => {
+
+        try {
+
+            const { first_name, last_name, username, email, msisdn } = this.state;
+
+            let obj = { first_name, last_name, username, email, msisdn };
+
+            let uid = localStorage.getItem('ltdn_uid');
+
+            await this.props.updateUser(uid, obj);
+
+            toast.success('Account Details Successfully Updated !');
+            
+        } catch (error) {
+
+            toast.error('Error occurred while updating account details !');
+
+            console.log(error);
+            
         }
 
     }
     
     render() {
+
+        const { first_name, last_name, username, email, msisdn } = this.state;
 
         return (
 
@@ -43,19 +101,29 @@ export default class Profile extends Component {
 
                     </div>
 
-                    <div className="flex flex-col w-full md:col-span-2">
+                    <form className="flex flex-col w-full md:col-span-2" onSubmit={(e) => {
+
+                        e.preventDefault();
+
+                        this.update();
+
+                    }}>
 
                         <div className="flex flex-col gap-y-3 mt-10">
 
-                            <input type="email" placeholder="Email" className="py-2 px-7 placeholder-gray-400 font-bold shadow-sm rounded-md focus:outline-none" />
+                            <input type="text" name='first_name' value={first_name} onChange={this.handleChange} placeholder="Firstname" className="py-2 px-7 placeholder-gray-400 font-bold shadow-sm rounded-md focus:outline-none" />
 
-                            <input type="email" placeholder="Password" className="py-2 px-7 placeholder-gray-400 font-bold shadow-sm rounded-md focus:outline-none" />
+                            <input type="text" name='last_name' value={last_name} onChange={this.handleChange} placeholder="Lastname" className="py-2 px-7 placeholder-gray-400 font-bold shadow-sm rounded-md focus:outline-none" />
 
-                            <input type="email" placeholder="Mpesa Number" className="py-2 px-7 placeholder-gray-400 font-bold shadow-sm rounded-md focus:outline-none" />
+                            <input type="text" name='username' value={username} onChange={this.handleChange} placeholder="Username" className="py-2 px-7 placeholder-gray-400 font-bold shadow-sm rounded-md focus:outline-none" />
+
+                            <input type="email" name='email' value={email} onChange={this.handleChange} placeholder="Email" className="py-2 px-7 placeholder-gray-400 font-bold shadow-sm rounded-md focus:outline-none" />
+
+                            <input type="text" name='msisdn' value={msisdn} onChange={this.handleChange} placeholder="Mpesa Number" className="py-2 px-7 placeholder-gray-400 font-bold shadow-sm rounded-md focus:outline-none" />
 
                         </div>
 
-                        <h2 className="py-6 font-bold text-gray-600">Log in via</h2>
+                        {/* <h2 className="py-6 font-bold text-gray-600">Log in via</h2>
 
                         <div className="flex flex-row justify-between items-center">
 
@@ -69,11 +137,11 @@ export default class Profile extends Component {
 
                             <div className="h-12 w-12 bg-white rounded-md shadow"></div>
 
-                        </div>
+                        </div> */}
 
-                        <button className="bg-tangerine text-white w-full py-2 my-5 font-bold rounded-md">Save</button>
+                        <button type='submit' className="bg-tangerine text-white w-full py-2 my-5 font-bold rounded-md">Save</button>
 
-                    </div>
+                    </form>
 
                     <div className="flex flex-col">
 
@@ -152,3 +220,21 @@ export default class Profile extends Component {
     }
 
 };
+
+const mapStateToProps = (state) => {
+
+    return {
+
+        user: state.user
+
+    }
+
+};
+
+const mapDispatchToProps = (dispatch)  => { 
+
+    return bindActionCreators({ showUser, updateUser }, dispatch);
+
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);

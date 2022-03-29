@@ -19,8 +19,6 @@ const MOQ = ({ match, getMoqById, moqs: { moq } }) => {
 
     }, [getMoqById, match?.params?.id]);
 
-    // console.log(moq);
-
     return (
 
         <Layout>
