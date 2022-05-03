@@ -76,9 +76,15 @@ const CategoryMOQsCard = (props) => {
                 
                         <div key={i} className="flex flex-col">
 
-                            <div className="bg-gray-100 h-36 rounded-t-md">
+                            <div className="relative bg-gray-100 h-36 rounded-t-md">
 
-                                <img className='h-36 object-contain w-full' src={moq?.product[0]?.images[0]} alt={moq.id} />
+                                <img className='h-36 object-contain w-full' src={moq?.product[0]?.images[0]} alt={moq.id} onError={(e) => { e.target.src = "https://via.placeholder.com/300" }} />
+
+                                <div className='absolute top-0 h-36 w-full bg-black bg-opacity-30 p-2'>
+
+                                    <h5 className='text-white absolute bottom-2 font-extrabold uppercase'>{moq?.product[0]?.name}</h5>
+
+                                </div>
 
                             </div>
 

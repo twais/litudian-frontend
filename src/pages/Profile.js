@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { showUser, updateUser } from './../store/actions/UserActions';
 import { toast } from 'react-toastify';
+import instance from './../utils/instance';
 
 class Profile extends Component {
 
@@ -24,6 +25,8 @@ class Profile extends Component {
             username: ''
              
         }
+
+        this.file = React.createRef();
 
     }
 
@@ -46,6 +49,34 @@ class Profile extends Component {
         this.setState({ first_name: details.first_name, last_name: details.last_name, email: details.email, msisdn: details.msisdn, username: details.username });
 
     };
+
+    changeAvatar = async (e) => {
+
+        try {
+
+            let file = e.target.files[0];
+
+            let formData = new FormData();
+
+            formData.append('file', file);
+
+            const response = await instance.post('upload', formData);
+
+            if(response.data !== "") {
+
+                console.log(response.data);
+
+            }
+
+        } catch (error) {
+
+            toast.error('Error occurred while updating user avatar !');
+
+            console.log(error);
+            
+        }
+
+    }
 
     update = async () => {
 
@@ -91,6 +122,10 @@ class Profile extends Component {
 
                         </div>
 
+                        <button className='w-full py-1 px-3 bg-tangerine text-white rounded-sm' onClick={() => this.file.current.click()}>Change Avatar</button>
+
+                        <input type="file" name="avatar" ref={this.file} className='hidden' onChange={this.changeAvatar} />
+
                         <div className="flex flex-col bg-white w-full py-5 justify-center items-end px-5 shadow rounded-md">
 
                             <h2 className="text-gray-800 uppercase font-bold text-xl text-right">Your <br />Litupoints</h2>
@@ -119,7 +154,7 @@ class Profile extends Component {
 
                             <input type="email" name='email' value={email} onChange={this.handleChange} placeholder="Email" className="py-2 px-7 placeholder-gray-400 font-bold shadow-sm rounded-md focus:outline-none" />
 
-                            <input type="text" name='msisdn' value={msisdn} onChange={this.handleChange} placeholder="Mpesa Number" className="py-2 px-7 placeholder-gray-400 font-bold shadow-sm rounded-md focus:outline-none" />
+                            <input type="text" name='msisdn' readOnly value={msisdn} onChange={this.handleChange} placeholder="Mpesa Number" className="py-2 px-7 placeholder-gray-400 font-bold shadow-sm rounded-md focus:outline-none" />
 
                         </div>
 

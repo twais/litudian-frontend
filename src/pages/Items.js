@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 import { getCategories } from './../store/actions/CategoryActions';
 import { getMoqs } from './../store/actions/MoqActions';
 import CategoryMOQsCard from './../components/CategoryMOQsCard';
+import Currency from 'react-currency-formatter';
 
 class Items extends Component {
 
@@ -57,17 +58,27 @@ class Items extends Component {
 
                     <div className="grid grid-cols-1 md:grid-cols-6 gap-4 py-5">
 
-                        {moqs.map((moq, i) => <div key={i} className="flex flex-col shadow-md">
+                        {moqs.map((moq, i) => <Link to={`/products/${moq?.id}`}>
+                
+                            <div key={i} className="flex flex-col">
 
-                            <div className="bg-white h-36 rounded-t-md">
+                                <div className="relative bg-gray-100 h-36 rounded-t-md">
 
-                                <img className='h-36 object-contain w-full' src={moq?.product[0]?.images[0]} alt={moq.id} />
-                                
+                                    <img className='h-36 object-contain w-full' src={moq?.product[0]?.images[0]} alt={moq.id} onError={(e) => { e.target.src = "https://via.placeholder.com/300" }} />
+
+                                    <div className='absolute top-0 h-36 w-full bg-black bg-opacity-30 p-2'>
+
+                                        <h5 className='text-white absolute bottom-2 font-extrabold uppercase'>{moq?.product[0]?.name}</h5>
+
+                                    </div>
+
+                                </div>
+
+                                <div className="bg-tangerine text-white text-center rounded-b-md py-1 capitalize">{typeof moq.price === "number" ? <Currency quantity={moq.price} currency="KES" /> : moq.price}</div>
+
                             </div>
 
-                            <div className="bg-tangerine text-white text-center rounded-b-md py-1">Ksh {moq.price}</div>
-
-                        </div>)}
+                        </Link>)}
 
                     </div>
 

@@ -81,21 +81,25 @@ class Auth extends Component {
 
         try {
 
-            const { first_name, last_name, email, msisdn, password, confirm_password } = this.state;
+            const { first_name, last_name, msisdn, password, confirm_password } = this.state;
 
-            let response = await instance.post('register', { first_name, last_name, email, msisdn, password, confirm_password });
+            // console.log({ first_name, last_name, email, msisdn, password, confirm_password });
+
+            let response = await instance.post('users', { first_name, last_name, username: first_name, msisdn, password, confirm_password });
 
             console.log(response);
 
             toast(`You have registered in successfully !`);
+
+            return window.location.href = '/';
             
         } catch (error) {
 
             console.log(error);
 
-            if(error.response) {
+            if(error.response && error.response.data !== '') {
 
-                console.log(JSON.stringify(error.response));
+                console.log(JSON.stringify(error.response.data));
 
             }
 
