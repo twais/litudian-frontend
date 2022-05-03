@@ -56,7 +56,7 @@ class Categories extends Component {
 
                                 <div className="relative bg-gray-100 h-36 rounded-t-md">
 
-                                    <img className='h-36 object-contain w-full' src={moq?.product[0]?.images[0]} alt={moq.id} onError={(e) => { e.target.src = "https://via.placeholder.com/300" }} />
+                                    <img className='h-36 object-contain w-full' src={moq?.product[0]?.images[0] || "https://via.placeholder.com/300"} alt={moq.id} onError={(e) => { e.target.src = "https://via.placeholder.com/300" }} />
 
                                     <div className='absolute top-0 h-36 w-full bg-black bg-opacity-30 p-2'>
 

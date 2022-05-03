@@ -269,7 +269,7 @@ const Product = ({ moq }) => {
                                 
             {moq?.product[0]?.images.map((image, i) => <div key={i} className="bg-white h-36 w-full rounded-md shadow-sm">
 
-                <img className='h-48 object-contain w-full' src={image} alt={"product"} onError={(e) => { e.target.src = "https://via.placeholder.com/300" }} />
+                <img className='h-48 object-contain w-full' src={image || "https://via.placeholder.com/300"} alt={"product"} onError={(e) => { e.target.src = "https://via.placeholder.com/300" }} />
 
             </div>)}
 
