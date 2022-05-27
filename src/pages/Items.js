@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 import { getCategories } from './../store/actions/CategoryActions';
 import { getMoqs } from './../store/actions/MoqActions';
 import CategoryMOQsCard from './../components/CategoryMOQsCard';
-import Currency from 'react-currency-formatter';
+import MOQ from './../components/MOQ';
 
 class Items extends Component {
 
@@ -56,29 +56,9 @@ class Items extends Component {
 
                     <h1 className="text-tangerine font-bold uppercase">Other Products</h1>
 
-                    <div className="grid grid-cols-1 md:grid-cols-6 gap-4 py-5">
+                    <div className="grid grid-cols-1 md:grid-cols-5 gap-4 py-5">
 
-                        {moqs.map((moq, i) => <Link to={`/products/${moq?.id}`}>
-                
-                            <div key={i} className="flex flex-col">
-
-                                <div className="relative bg-gray-100 h-36 rounded-t-md">
-
-                                    <img className='h-36 object-contain w-full' src={moq?.product[0]?.images[0] || "https://via.placeholder.com/300"} alt={moq.id} onError={(e) => { e.target.src = "https://via.placeholder.com/300" }} />
-
-                                    <div className='absolute top-0 h-36 w-full bg-black bg-opacity-30 p-2'>
-
-                                        <h5 className='text-white absolute bottom-2 font-extrabold uppercase'>{moq?.product[0]?.name}</h5>
-
-                                    </div>
-
-                                </div>
-
-                                <div className="bg-tangerine text-white text-center rounded-b-md py-1 capitalize">{typeof moq.price === "number" ? <Currency quantity={moq.price} currency="KES" /> : moq.price}</div>
-
-                            </div>
-
-                        </Link>)}
+                        {moqs.map((moq, i) => <MOQ key={i} moq={moq} />)}
 
                     </div>
 

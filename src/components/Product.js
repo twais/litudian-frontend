@@ -1,4 +1,6 @@
-import React from 'react'
+import React from 'react';
+import { toTitleCase } from './../utils/helpers';
+import { Tab } from '@headlessui/react';
 
 const Product = ({ moq }) => {
 
@@ -7,7 +9,115 @@ const Product = ({ moq }) => {
     return (
 
         <>
-        <div className="flex flex-col md:flex-row bg-white rounded-md shadow-md my-5 p-4 gap-x-3">
+        <div className='w-full flex-col'>
+
+            <div className='text-tangerine flex-row items-center justify-start gap-3 font-medium'>
+
+                <span>Category</span>
+
+                <span className='mx-1 text-2xl'>&rsaquo;</span>
+
+                <span className='text-litudian-orange'>{moq !== null && toTitleCase(moq?.product[0]?.name)}</span>
+
+            </div>
+
+            <div className='w-full grid grid-cols-3 gap-8 mt-3'>
+
+                <div className=''>
+
+                    <h1 className="text-2xl text-gray-700 font-bold">{moq !== null && toTitleCase(moq?.product[0]?.name)}</h1>
+
+                </div>
+
+                <div className='col-span-2 flex flex-col'>
+
+                    <div className='flex flex-row justify-between items-center'>
+
+                        <div className='flex flex-col'>
+
+                            <h2 className='text-2xl font-bold text-tangerine'>Ksh 2000</h2>
+
+                            <p className='text-md text-gray-600 font-bold text-sm'>MOQ: 15 items</p>
+
+                        </div>
+
+                        <div className='flex flex-col'>
+
+                            <p className='text-md text-gray-900 font-bold text-sm'>Supplier MOQ: 300 items</p>
+
+                            <p className='text-md text-gray-600 font-bold text-sm'>MOQ: 15 items</p>
+
+                        </div>
+
+                        <div className='flex flex-col'>
+
+                            <h2 className='text-lg font-bold text-gray-600'>Ksh 2000</h2>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div className='w-full grid grid-cols-3 gap-8 mt-3'>
+
+                 <div className="h-full w-full flex flex-col">
+
+                    <img className='h-full object-contain w-full' src={moq !== null ? moq?.product[0]?.images[0] : ''} alt={"product"} />
+
+                    {moq !== null && moq?.product[0]?.images !== undefined &&  moq?.product[0]?.images.length > 1 && <div className="grid grid-cols-4 gap-2 mt-3">
+                                
+                        {moq?.product[0]?.images.map((image, i) => <div key={i} className="bg-white w-full rounded-md shadow-sm">
+
+                            <img className='h-full object-contain w-full' src={image || "https://via.placeholder.com/300"} alt={"product"} onError={(e) => { e.target.src = "https://via.placeholder.com/300" }} />
+
+                        </div>)}
+
+                    </div>}
+
+                </div>
+
+                <div className='col-span-2 flex flex-col'>
+
+                    <Tab.Group>
+
+                        <Tab.List className='flex flex-row justify-between'>
+
+                            <Tab className='w-full rounded-lg py-2.5 font-bold text-lg leading-5 text-tangerine text-left px-2'>Order</Tab>
+
+                            <Tab className='w-full rounded-lg py-2.5 font-bold text-lg leading-5 text-litudian-orange text-left px-2'>Description</Tab>
+
+                            <Tab className='w-full rounded-lg py-2.5 font-bold text-lg leading-5 text-tangerine text-left px-2'>Customer Reviews</Tab>
+
+                        </Tab.List>
+
+                        <Tab.Panels className='w-full bg-white h-72 p-4'>
+
+                            <Tab.Panel></Tab.Panel>
+
+                            <Tab.Panel>
+                                
+                                <h1 className="text-2xl text-gray-700 font-bold mb-3">{moq !== null && toTitleCase(moq?.product[0]?.name)}</h1>
+
+                                <p className='text-gray-600'>{moq !== null && moq?.product[0]?.description}</p>
+                                
+                            </Tab.Panel>
+
+                            <Tab.Panel></Tab.Panel>
+
+                        </Tab.Panels>
+
+                    </Tab.Group>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {/* <div className="flex flex-col md:flex-row bg-white rounded-md shadow-md my-5 p-4 gap-x-3">
 
             <div className="md:flex-1 flex flex-col gap-y-3 px-3">
 
@@ -273,7 +383,7 @@ const Product = ({ moq }) => {
 
             </div>)}
 
-        </div>}
+        </div>} */}
 
     </>
 
