@@ -35,23 +35,23 @@ const Product = ({ moq }) => {
 
                         <div className='flex flex-col'>
 
-                            <h2 className='text-2xl font-bold text-tangerine'>Ksh 2000</h2>
+                            <h2 className='text-2xl font-bold text-tangerine'>Ksh {moq?.price}</h2>
 
-                            <p className='text-md text-gray-600 font-bold text-sm'>MOQ: 15 items</p>
-
-                        </div>
-
-                        <div className='flex flex-col'>
-
-                            <p className='text-md text-gray-900 font-bold text-sm'>Supplier MOQ: 300 items</p>
-
-                            <p className='text-md text-gray-600 font-bold text-sm'>MOQ: 15 items</p>
+                            <p className='text-md text-gray-600 font-bold text-sm'>MOQ: {moq?.quantity} items / bundle</p>
 
                         </div>
 
                         <div className='flex flex-col'>
 
-                            <h2 className='text-lg font-bold text-gray-600'>Ksh 2000</h2>
+                            <p className='text-md text-gray-900 font-bold text-sm'>Supplier MOQ: {moq?.quantity} items</p>
+
+                            <p className='text-md text-gray-600 font-bold text-sm'>40% Sold</p>
+
+                        </div>
+
+                        <div className='flex flex-col'>
+
+                            <h2 className='text-lg font-bold text-gray-600'>Rating</h2>
 
                         </div>
 
@@ -65,7 +65,7 @@ const Product = ({ moq }) => {
 
                  <div className="h-full w-full flex flex-col">
 
-                    <img className='h-full object-contain w-full' src={moq !== null ? moq?.product[0]?.images[0] : ''} alt={"product"} />
+                    <img className='h-96 object-contain w-full' src={moq !== null ? moq?.product[0]?.images[0] : ''} alt={"product"} />
 
                     {moq !== null && moq?.product[0]?.images !== undefined &&  moq?.product[0]?.images.length > 1 && <div className="grid grid-cols-4 gap-2 mt-3">
                                 
@@ -101,7 +101,7 @@ const Product = ({ moq }) => {
                                 
                                 <h1 className="text-2xl text-gray-700 font-bold mb-3">{moq !== null && toTitleCase(moq?.product[0]?.name)}</h1>
 
-                                <p className='text-gray-600'>{moq !== null && moq?.product[0]?.description}</p>
+                                <p className='text-gray-600'>{moq !== null && toTitleCase(moq?.product[0]?.description)}</p>
                                 
                             </Tab.Panel>
 
