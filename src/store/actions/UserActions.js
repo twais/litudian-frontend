@@ -31,6 +31,7 @@ export const showUser = (id) => async dispatch => {
 export const updateUser = (id, obj = {}) => async dispatch => {
 
     try {
+        
         const response = await instance.patch(`users/${id}`, obj);
 
         if(response.data !== "") {

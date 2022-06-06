@@ -1,14 +1,43 @@
 import React from 'react';
 import { toTitleCase } from './../utils/helpers';
 import { Tab } from '@headlessui/react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { getReviewsById } from './../store/actions/ReviewActions';
 
-const Product = ({ moq }) => {
+const Product = ({ moq, getReviewsById }) => {
+    
+    React.useEffect(() => {
 
-    console.log(moq);
+        async function fetchReviewById () {
+
+            if(moq?.product_id) {
+
+                await getReviewsById(moq?.product_id);
+
+            }
+
+        }
+
+        fetchReviewById();
+
+    }, [moq, getReviewsById]);
+
+    const getPercentage = (bids, quantity) => {
+
+        if (bids !== undefined && quantity !== undefined) {
+
+            return Math.trunc((bids?.length * 100) / quantity);
+
+        }
+
+        return 0;
+    }
 
     return (
 
         <>
+
         <div className='w-full flex-col'>
 
             <div className='text-tangerine flex-row items-center justify-start gap-3 font-medium'>
@@ -45,7 +74,7 @@ const Product = ({ moq }) => {
 
                             <p className='text-md text-gray-900 font-bold text-sm'>Supplier MOQ: {moq?.quantity} items</p>
 
-                            <p className='text-md text-gray-600 font-bold text-sm'>40% Sold</p>
+                            <p className='text-md text-gray-600 font-bold text-sm'>{getPercentage(moq?.bids, moq?.quantity)}% Sold</p>
 
                         </div>
 
@@ -392,4 +421,20 @@ const Product = ({ moq }) => {
 
 };
 
-export default Product;
+const mapStateToProps = (state) => {
+
+    return {
+
+        reviews: state.reviews
+
+    }
+
+};
+
+const mapDispatchToProps = (dispatch)  => { 
+
+    return bindActionCreators({ getReviewsById }, dispatch);
+
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Product);

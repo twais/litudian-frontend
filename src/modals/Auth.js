@@ -54,6 +54,8 @@ class Auth extends Component {
             localStorage.setItem('ltdn', data.token); 
             
             localStorage.setItem('ltdn_uid', data.id);
+
+            localStorage.setItem('ltdn_points', data?.points);
             
             localStorage.setItem('ltdn_exp', Math.floor(Date.now() / 1000) + ((60 * 60) * 1));
 
@@ -81,11 +83,11 @@ class Auth extends Component {
 
         try {
 
-            const { first_name, last_name, msisdn, password, confirm_password } = this.state;
+            const { first_name, last_name, msisdn, email, password, confirm_password } = this.state;
 
             // console.log({ first_name, last_name, email, msisdn, password, confirm_password });
 
-            let response = await instance.post('users', { first_name, last_name, username: first_name, msisdn, email: '', password, confirm_password });
+            let response = await instance.post('users', { first_name, last_name, username: first_name, msisdn, email, password, confirm_password });
 
             console.log(response);
 

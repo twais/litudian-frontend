@@ -64,7 +64,15 @@ class Profile extends Component {
 
             if(response.data !== "") {
 
-                console.log(response.data);
+                let obj = { avatar: response.data.file };
+
+                let uid = localStorage.getItem('ltdn_uid');
+
+                await this.props.updateUser(uid, obj);
+
+                toast.success('User Avatar updated successfully !');
+
+                return window.location.href = '/profile';
 
             }
 
@@ -106,6 +114,10 @@ class Profile extends Component {
 
         const { first_name, last_name, username, email, msisdn } = this.state;
 
+        const { user: { details } } = this.props;
+
+        const lituPoints = localStorage.getItem('ltdn_points');
+
         return (
 
             <Layout>
@@ -118,7 +130,11 @@ class Profile extends Component {
 
                         <div className="w-full h-48 bg-gray-400 rounded-md flex flex-col justify-center items-center shadow">
 
-                            <h2 className="text-gray-50 uppercase font-bold text-center">Click To Change Photo</h2>
+                            {details?.avatar && <img src={details?.avatar} alt={details?.first_name} onError={(e) => {
+                                e.target.src = '/img/avatar.jpg';
+                            }} />}
+
+                            {!details?.avatar &&<h2 className="text-gray-50 uppercase font-bold text-center">Click To Change Photo</h2>}
 
                         </div>
 
@@ -130,7 +146,7 @@ class Profile extends Component {
 
                             <h2 className="text-gray-800 uppercase font-bold text-xl text-right">Your <br />Litupoints</h2>
 
-                            <h2 className="text-tangerine uppercase font-bold text-xl">4,500</h2>
+                            <h2 className="text-tangerine uppercase font-bold text-xl">{lituPoints ? lituPoints : 'N/A'}</h2>
 
                         </div>
 
@@ -154,7 +170,7 @@ class Profile extends Component {
 
                             <input type="email" name='email' value={email} onChange={this.handleChange} placeholder="Email" className="py-2 px-7 placeholder-gray-400 font-bold shadow-sm rounded-md focus:outline-none" />
 
-                            <input type="text" name='msisdn' readOnly value={msisdn} onChange={this.handleChange} placeholder="Mpesa Number" className="py-2 px-7 placeholder-gray-400 font-bold shadow-sm rounded-md focus:outline-none" />
+                            <input type="text" name='msisdn' readOnly value={msisdn} onChange={this.handleChange} placeholder="Mpesa Number" className="py-2 px-7 placeholder-gray-400 font-bold shadow-sm rounded-md focus:outline-none text-gray-600 bg-gray-200" />
 
                         </div>
 
