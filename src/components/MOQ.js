@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Currency from 'react-currency-formatter';
+import CurrencyFormat from 'react-currency-format';
 import { toTitleCase, truncateText } from './../utils/helpers';
 
 const MOQ = ({ moq }) => {
@@ -20,7 +20,7 @@ const MOQ = ({ moq }) => {
             </div>
                 <div className="bg-white rounded-b-md py-2 px-3 capitalize flex flex-col gap-1">
                     <h4 className='text-gray-700 font-semibold mb-2'>{truncateText(toTitleCase(moq?.product[0]?.name), 16)}</h4>
-                    <span className='text-md text-tangerine font-bold text-lg'>{typeof moq.price === "number" ? <Currency quantity={moq.price} currency="KES" /> : moq.price}</span>
+                    <span className='text-md text-tangerine font-bold text-lg'>{typeof moq.price === "number" ? <CurrencyFormat value={moq.price} displayType={'text'} thousandSeparator={true} prefix={'KES '} /> : moq.price}</span>
                     <span className='text-md text-gray-600 font-bold text-sm'>MOQ: {moq?.quantity} items</span>
                     <span className='text-md text-litudian-orange font-bold text-sm'>{getPercentage(moq?.bids, moq?.quantity)}% SOLD</span>
             </div>
