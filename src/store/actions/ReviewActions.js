@@ -1,4 +1,4 @@
-// import { REVIEWS } from './../types/Index';
+import { REVIEWS } from './../types/Index';
 import instance from './../../utils/instance';
 
 export const getReviewsById = (id) => async dispatch => {
@@ -8,8 +8,12 @@ export const getReviewsById = (id) => async dispatch => {
         const response = await instance.get(`reviews/${id}`);
 
         console.log(response.data);
+        
+        if (response?.data && response?.data?.reviews) {
 
-        // dispatch({ type: REVIEWS, payload: response.data.categories });
+            dispatch({ type: REVIEWS, payload: response?.data?.reviews });
+
+        }
 
         return response.data;
         

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getReviewsById } from './../store/actions/ReviewActions';
 
-const Product = ({ moq, getReviewsById }) => {
+const Product = ({ moq, getReviewsById, reviews: { data: reviews } }) => {
     
     React.useEffect(() => {
 
@@ -82,6 +82,8 @@ const Product = ({ moq, getReviewsById }) => {
 
                             <h2 className='text-lg font-bold text-gray-600'>Rating</h2>
 
+                            <p>{reviews / reviews.length}</p>
+
                         </div>
 
                     </div>
@@ -134,7 +136,33 @@ const Product = ({ moq, getReviewsById }) => {
                                 
                             </Tab.Panel>
 
-                            <Tab.Panel></Tab.Panel>
+                            <Tab.Panel>
+
+                                <div>
+
+                                    {reviews.map((review, i) => <div key={i} className="w-full grid grid-cols-5 mt-4">
+
+                                        <div className='flex flex-col items-center justify-center'>
+
+                                            <img className='m-0 p-0' src='/img/user.png' alt='user' />
+
+                                            <h3 className='font-extrabold text-tangerine'>{review?.rating}</h3>
+
+                                        </div>
+
+                                        <div className='flex flex-col col-span-4'>
+
+                                            <h1 className='text-md font-semibold capitalize'>Customer</h1>
+
+                                            <p className='capitalize text-sm text-gray-600'>{review?.review}</p>
+
+                                        </div>
+
+                                    </div>)}
+
+                                </div>
+
+                            </Tab.Panel>
 
                         </Tab.Panels>
 
