@@ -1,11 +1,16 @@
 import React from 'react';
+import ReactStars from 'react-stars'
 import { toTitleCase } from './../utils/helpers';
 import { Tab } from '@headlessui/react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getReviewsById } from './../store/actions/ReviewActions';
 
-const Product = ({ moq, getReviewsById, reviews: { data: reviews } }) => {
+function classNames(...classes) {
+    return classes.filter(Boolean).join(' ')
+}
+
+const Product = ({ moq, getReviewsById, reviews: { data: reviews }, product }) => {
     
     React.useEffect(() => {
 
@@ -33,6 +38,8 @@ const Product = ({ moq, getReviewsById, reviews: { data: reviews } }) => {
 
         return 0;
     }
+
+    console.log(reviews);
 
     return (
 
@@ -82,7 +89,13 @@ const Product = ({ moq, getReviewsById, reviews: { data: reviews } }) => {
 
                             <h2 className='text-lg font-bold text-gray-600'>Rating</h2>
 
-                            <p>{reviews / reviews.length}</p>
+                            <div className='flex flex-row justify-center items-center gap-x-1'>
+
+                                <ReactStars value={reviews && reviews.length > 0 ? reviews.map(item => item.rating).reduce((prev, next) => prev + next) / reviews.length : 0} count={2} size={26} activeColor="#ffd700" edit={false} />
+
+                                <p>{reviews && reviews.length > 0 ? reviews.map(item => item.rating).reduce((prev, next) => prev + next) / reviews.length : 0}</p>
+
+                            </div>
 
                         </div>
 
@@ -96,7 +109,11 @@ const Product = ({ moq, getReviewsById, reviews: { data: reviews } }) => {
 
                  <div className="h-full w-full flex flex-col">
 
-                    <img className='h-96 object-contain w-full' src={moq !== null ? moq?.product[0]?.images[0] : ''} alt={"product"} />
+                    <img className='h-96 object-contain w-full' src={moq !== null ? moq?.product[0]?.images[0] : ''} alt={"product"} onError={(e) => {
+
+                        e.target.src = 'https://via.placeholder.com/300';
+
+                    }} />
 
                     {moq !== null && moq?.product[0]?.images !== undefined &&  moq?.product[0]?.images.length > 1 && <div className="grid grid-cols-4 gap-2 mt-3">
                                 
@@ -116,17 +133,89 @@ const Product = ({ moq, getReviewsById, reviews: { data: reviews } }) => {
 
                         <Tab.List className='flex flex-row justify-between'>
 
-                            <Tab className='w-full rounded-lg py-2.5 font-bold text-lg leading-5 text-tangerine text-left px-2'>Order</Tab>
+                            <Tab className={({ selected }) => classNames(`w-full rounded-lg py-2.5 font-bold text-lg leading-5 ${selected ? 'text-litudian-orange' : 'text-tangerine'} text-left px-2`)}>Order</Tab>
 
-                            <Tab className='w-full rounded-lg py-2.5 font-bold text-lg leading-5 text-litudian-orange text-left px-2'>Description</Tab>
+                            <Tab className={({ selected }) => classNames(`w-full rounded-lg py-2.5 font-bold text-lg leading-5 ${selected ? 'text-litudian-orange' : 'text-tangerine'} text-left px-2`)}>Description</Tab>
 
-                            <Tab className='w-full rounded-lg py-2.5 font-bold text-lg leading-5 text-tangerine text-left px-2'>Customer Reviews</Tab>
+                            <Tab className={({ selected }) => classNames(`w-full rounded-lg py-2.5 font-bold text-lg leading-5 ${selected ? 'text-litudian-orange' : 'text-tangerine'} text-left px-2`)}>Customer Reviews</Tab>
 
                         </Tab.List>
 
-                        <Tab.Panels className='w-full bg-white h-72 p-4'>
+                        <Tab.Panels className='w-full bg-white min-h-full p-4'>
 
-                            <Tab.Panel></Tab.Panel>
+                            <Tab.Panel>
+
+                                <div className='flex flex-col px-2 py-5'>
+
+                                    <h1 className='text-md text-tangerine font-bold'>Size</h1>
+
+                                    <div className='flex flex-row gap-x-3 my-4'>
+
+                                        {product?.readable_sizes && product?.readable_sizes.length > 0 && product?.readable_sizes.map((size) => <button className='py-1 px-5 border-2 border-tangerine hover:border-litudian-orange text-tangerine hover:text-litudian-orange font-bold capitalize rounded'>{size?.value}</button>)}
+
+                                    </div>
+
+                                    <h1 className='text-md text-tangerine font-bold'>Color</h1>
+
+                                    <div className='gap-x-3 my-4 grid grid-cols-5'>
+
+                                        {product?.readable_colors && product?.readable_colors.length > 0 && product?.readable_colors.map((color) =><div className='flex flex-col justify-center items-center gap-y-3 p-0'>
+
+                                            <span className='font-bold m-0 capitalize'>{color?.label}</span>
+
+                                            <button className='py-1 px-5 border-2 border-gray-500 hover:border-litudian-orange text-tangerine hover:text-litudian-orange font-bold capitalize rounded m-0 w-full'>2</button>
+
+                                        </div>)}
+
+                                    </div>
+
+                                    <h1 className='text-md text-tangerine font-bold'>Shipping Method</h1>
+
+                                    <div className='gap-x-3 my-4 grid grid-cols-4'>
+
+                                        <div className='flex flex-row rounded border-2 border-litudian-orange'>
+
+                                            <div className='px-4 bg-green-500 text-white flex flex-col justify-center items-center'>
+
+                                                <img className='m-0 p-0' src='/img/ship.png' alt='ship' />
+
+                                            </div>
+
+                                            <div className='flex flex-col flex-1 px-2 py-1'>
+
+                                                <h4 className='text-gray-700 text-sm mb-0 font-bold'>Shipping</h4>
+
+                                                <p className='text-xs text-gray-500'>Ksh 260</p>
+
+                                            </div>
+
+                                        </div>
+
+                                        <div className='flex flex-row rounded border-2 border-litudian-orange'>
+
+                                            <div className='px-4 bg-blue-500 text-white flex flex-col justify-center items-center'>
+
+                                                <img className='m-0 p-0' src='/img/plane.png' alt='plane' />
+
+                                            </div>
+
+                                            <div className='flex flex-col flex-1 px-2 py-1'>
+
+                                                <h4 className='text-gray-700 text-sm mb-0 font-bold'>Air</h4>
+
+                                                <p className='text-xs text-gray-500'>Ksh 260</p>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <button className='w-full rounded-full bg-tangerine text-white py-2 my-4'>Add to Orders</button>
+
+                                </div>
+
+                            </Tab.Panel>
 
                             <Tab.Panel>
                                 
@@ -140,13 +229,19 @@ const Product = ({ moq, getReviewsById, reviews: { data: reviews } }) => {
 
                                 <div>
 
-                                    {reviews.map((review, i) => <div key={i} className="w-full grid grid-cols-5 mt-4">
+                                    {reviews.map((review, i) => <div key={i} className="w-full flex flex-row justify-start items-center gap-x-5 mt-4">
 
                                         <div className='flex flex-col items-center justify-center'>
 
                                             <img className='m-0 p-0' src='/img/user.png' alt='user' />
 
-                                            <h3 className='font-extrabold text-tangerine'>{review?.rating}</h3>
+                                            <div className='flex flex-row justify-center items-center gap-x-1'>
+
+                                                <ReactStars value={review?.rating} count={1} size={26} activeColor="#ffd700" edit={false} />
+
+                                                <h3 className='font-extrabold text-tangerine'>{review?.rating}</h3>
+
+                                            </div>
 
                                         </div>
 

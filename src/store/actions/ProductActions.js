@@ -1,4 +1,4 @@
-// import { PRODUCTS } from './../types/Index';
+import { GET_PRODUCT } from './../types/Index';
 import instance from './../../utils/instance';
 
 export const getProducts = () => async dispatch => {
@@ -6,10 +6,6 @@ export const getProducts = () => async dispatch => {
     try {
 
         const response = await instance.get('products');
-
-        console.log(response.data);
-
-        // dispatch({ type: PRODUCTS, payload: response.data.categories });
 
         return response.data;
         
@@ -20,3 +16,25 @@ export const getProducts = () => async dispatch => {
     }
 
 };
+
+export const getProductById = (id) => async dispatch => {
+
+    try {
+
+        const response = await instance.get(`products/${id}`);
+
+        if (response?.data) {
+
+            console.log(response?.data);
+
+            dispatch({ type: GET_PRODUCT, payload: response?.data });
+
+        }
+
+    } catch (error) {
+
+        throw error;
+        
+    }
+
+}

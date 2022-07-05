@@ -5,8 +5,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getMoqById } from './../store/actions/MoqActions';
 import { getReviewsById } from './../store/actions/ReviewActions';
+import { getProductById } from './../store/actions/ProductActions';
 
-const MOQ = ({ match, getMoqById, moqs: { moq }, getReviewsById, reviews: { data: reviews } }) => {
+const MOQ = ({ match, getMoqById, moqs: { moq }, getReviewsById, reviews: { data: reviews }, getProductById, products: { product } }) => {
 
     useEffect(() => {
 
@@ -18,21 +19,23 @@ const MOQ = ({ match, getMoqById, moqs: { moq }, getReviewsById, reviews: { data
 
                 await getReviewsById(result?.product_id);
 
+                await getProductById(result?.product_id);
+
             }
 
         };
 
         fetchMoqById();
 
-    }, [getMoqById, getReviewsById, match?.params?.id]);
+    }, [getMoqById, getReviewsById, match?.params?.id, getProductById]);
 
-    console.log(reviews);
+    console.log(product);
 
     return (
 
         <Layout>
             
-            <Product moq={moq} reviews={reviews} />
+            <Product moq={moq} reviews={reviews} product={product} />
 
         </Layout>
 
@@ -46,7 +49,9 @@ const mapStateToProps = (state) => {
 
         moqs: state.moqs,
 
-        reviews: state.reviews
+        reviews: state.reviews,
+
+        products: state.products
 
     }
 
@@ -54,7 +59,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch)  => { 
 
-    return bindActionCreators({ getMoqById, getReviewsById }, dispatch);
+    return bindActionCreators({ getMoqById, getReviewsById, getProductById }, dispatch);
 
 };
 

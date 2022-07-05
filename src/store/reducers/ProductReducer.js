@@ -1,7 +1,8 @@
-import { PRODUCTS } from './../types/Index';
+import { PRODUCTS, GET_PRODUCT } from './../types/Index';
 
 const initialState = {
     data: [],
+    product: null
 };
 
 export default function ProductReducer(state = initialState, action) {
@@ -15,6 +16,16 @@ export default function ProductReducer(state = initialState, action) {
                 ...state,
 
                 data: action.payload,
+
+            };
+        
+        case GET_PRODUCT: 
+
+            return {
+
+                ...state,
+
+                product: action.payload,
 
             };
 

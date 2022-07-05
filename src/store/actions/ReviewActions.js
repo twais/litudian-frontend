@@ -7,7 +7,7 @@ export const getReviewsById = (id) => async dispatch => {
 
         const response = await instance.get(`reviews/${id}`);
 
-        console.log(response.data);
+        // console.log(response.data);
         
         if (response?.data && response?.data?.reviews) {
 
