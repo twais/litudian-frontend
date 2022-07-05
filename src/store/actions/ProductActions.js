@@ -25,8 +25,6 @@ export const getProductById = (id) => async dispatch => {
 
         if (response?.data) {
 
-            console.log(response?.data);
-
             dispatch({ type: GET_PRODUCT, payload: response?.data });
 
         }

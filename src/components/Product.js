@@ -39,8 +39,6 @@ const Product = ({ moq, getReviewsById, reviews: { data: reviews }, product }) =
         return 0;
     }
 
-    console.log(reviews);
-
     return (
 
         <>
@@ -151,7 +149,7 @@ const Product = ({ moq, getReviewsById, reviews: { data: reviews }, product }) =
 
                                     <div className='flex flex-row gap-x-3 my-4'>
 
-                                        {product?.readable_sizes && product?.readable_sizes.length > 0 && product?.readable_sizes.map((size) => <button className='py-1 px-5 border-2 border-tangerine hover:border-litudian-orange text-tangerine hover:text-litudian-orange font-bold capitalize rounded'>{size?.value}</button>)}
+                                        {product?.readable_sizes && product?.readable_sizes.length > 0 && product?.readable_sizes.map((size, i) => <button key={i} className='py-1 px-5 border-2 border-tangerine hover:border-litudian-orange text-tangerine hover:text-litudian-orange font-bold capitalize rounded'>{size?.value}</button>)}
 
                                     </div>
 
@@ -159,7 +157,7 @@ const Product = ({ moq, getReviewsById, reviews: { data: reviews }, product }) =
 
                                     <div className='gap-x-3 my-4 grid grid-cols-5'>
 
-                                        {product?.readable_colors && product?.readable_colors.length > 0 && product?.readable_colors.map((color) =><div className='flex flex-col justify-center items-center gap-y-3 p-0'>
+                                        {product?.readable_colors && product?.readable_colors.length > 0 && product?.readable_colors.map((color, i) =><div key={i} className='flex flex-col justify-center items-center gap-y-3 p-0'>
 
                                             <span className='font-bold m-0 capitalize'>{color?.label}</span>
 

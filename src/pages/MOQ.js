@@ -29,8 +29,6 @@ const MOQ = ({ match, getMoqById, moqs: { moq }, getReviewsById, reviews: { data
 
     }, [getMoqById, getReviewsById, match?.params?.id, getProductById]);
 
-    console.log(product);
-
     return (
 
         <Layout>
