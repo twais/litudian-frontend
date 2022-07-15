@@ -1,16 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactStars from 'react-stars'
 import { toTitleCase } from './../utils/helpers';
 import { Tab } from '@headlessui/react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getReviewsById } from './../store/actions/ReviewActions';
+import Rating from './../modals/Rating';
+
+const expiry = localStorage.getItem('ltdn_exp');
+const currentTime = Date.now() / 1000;
+const authenticated = expiry > currentTime;
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
 const Product = ({ moq, getReviewsById, reviews: { data: reviews }, product }) => {
+
+    const [show, setShow] = useState(false);
     
     React.useEffect(() => {
 
@@ -38,6 +45,8 @@ const Product = ({ moq, getReviewsById, reviews: { data: reviews }, product }) =
 
         return 0;
     }
+
+    const toggleRatingModal = () => setShow(!show)
 
     return (
 
@@ -91,7 +100,7 @@ const Product = ({ moq, getReviewsById, reviews: { data: reviews }, product }) =
 
                                 <ReactStars value={reviews && reviews.length > 0 ? reviews.map(item => item.rating).reduce((prev, next) => prev + next) / reviews.length : 0} count={2} size={26} activeColor="#ffd700" edit={false} />
 
-                                <p>{reviews && reviews.length > 0 ? reviews.map(item => item.rating).reduce((prev, next) => prev + next) / reviews.length : 0}</p>
+                                <p className='text-tangerine font-extrabold'>{reviews && reviews.length > 0 ? reviews.map(item => item.rating).reduce((prev, next) => prev + next) / reviews.length : 0}</p>
 
                             </div>
 
@@ -225,7 +234,13 @@ const Product = ({ moq, getReviewsById, reviews: { data: reviews }, product }) =
 
                             <Tab.Panel>
 
-                                <div>
+                                <div className='flex flex-col'>
+
+                                    {authenticated && <div className='w-full flex flex-row items-center justify-end'>
+
+                                        <button className='bg-tangerine text-white text-base rounded px-6 py-2' onClick={() => toggleRatingModal()}>Add Review</button>
+
+                                    </div>}
 
                                     {reviews.map((review, i) => <div key={i} className="w-full flex flex-row justify-start items-center gap-x-5 mt-4">
 
@@ -534,6 +549,8 @@ const Product = ({ moq, getReviewsById, reviews: { data: reviews }, product }) =
             </div>)}
 
         </div>} */}
+
+        <Rating toggle={toggleRatingModal} open={show} product={product} />
 
     </>
 

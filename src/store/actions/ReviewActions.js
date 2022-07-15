@@ -6,8 +6,6 @@ export const getReviewsById = (id) => async dispatch => {
     try {
 
         const response = await instance.get(`reviews/${id}`);
-
-        // console.log(response.data);
         
         if (response?.data && response?.data?.reviews) {
 
@@ -15,6 +13,21 @@ export const getReviewsById = (id) => async dispatch => {
 
         }
 
+        return response.data;
+        
+    } catch (error) {
+
+        throw error.response.data;
+        
+    }
+
+};
+
+export const submitReview = (data) => async dispatch => {
+
+    try {
+
+        const response = await instance.post(`reviews`, data);
         return response.data;
         
     } catch (error) {
