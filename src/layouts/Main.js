@@ -48,7 +48,7 @@ class Main extends Component {
 
             <div className="min-h-screen bg-gray-100 flex flex-col">
 
-                <div className="max-w-5xl mx-auto px-4 md:px-0 w-full">
+                <div className="max-w-7xl mx-auto px-4 md:px-0 w-full">
 
                     <div className="flex flex-row justify-between items-center py-4">
 
@@ -178,13 +178,13 @@ class Main extends Component {
 
                 </div>
 
-                <div className="max-w-5xl mx-auto px-4 md:px-0 w-full min-h-screen">
+                <div className="max-w-7xl mx-auto px-4 md:px-0 w-full min-h-screen">
 
                     {this.props.children}
 
                 </div>
 
-                <div className="max-w-5xl mx-auto px-4 py-8 md:px-0 w-full">
+                <div className="max-w-7xl mx-auto px-4 py-8 md:px-0 w-full">
 
                     <p className="text-gray-600 font-bold">Litudian &copy; 2021</p>
 

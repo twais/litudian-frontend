@@ -48,7 +48,7 @@ const Product = ({ moq, getReviewsById, reviews: { data: reviews }, product }) =
     }
 
     const toggleRatingModal = () => setShow(!show)
-
+    
     return (
 
         <>

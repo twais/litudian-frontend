@@ -26,7 +26,7 @@ const CategoryMOQsCard = (props) => {
 
                     data = response.data.moqs;
 
-                    setList(data.splice(0, 3));
+                    setList(data.splice(0, 4));
 
                 }
                 
@@ -58,17 +58,7 @@ const CategoryMOQsCard = (props) => {
 
             </div>
 
-            {/* <div className="flex flex-row justify-start gap-x-1 py-1">
-
-                <span className="bg-litudian-orange text-gray-50 font-bold px-4 rounded-lg text-xs py-1">Leather</span>
-
-                <span className="bg-litudian-orange text-gray-50 font-bold px-4 rounded-lg text-xs py-1">Cloth</span>
-
-                <span className="bg-litudian-orange text-gray-50 font-bold px-4 rounded-lg text-xs py-1">Rexin</span>
-
-            </div> */}
-
-            <div className="grid grid-cols-3 gap-2 py-5">
+            <div className="grid grid-cols-4 gap-2 py-5">
 
                 {list.map((moq, i) => <MOQ key={i} moq={moq} />)}
 
