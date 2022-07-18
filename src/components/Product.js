@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getReviewsById } from './../store/actions/ReviewActions';
 import Rating from './../modals/Rating';
+import { toast } from 'react-toastify';
 
 const expiry = localStorage.getItem('ltdn_exp');
 const currentTime = Date.now() / 1000;
@@ -100,7 +101,7 @@ const Product = ({ moq, getReviewsById, reviews: { data: reviews }, product }) =
 
                                 <ReactStars value={reviews && reviews.length > 0 ? reviews.map(item => item.rating).reduce((prev, next) => prev + next) / reviews.length : 0} count={2} size={26} activeColor="#ffd700" edit={false} />
 
-                                <p className='text-tangerine font-extrabold'>{reviews && reviews.length > 0 ? reviews.map(item => item.rating).reduce((prev, next) => prev + next) / reviews.length : 0}</p>
+                                <p className='text-tangerine font-extrabold'>{reviews && reviews.length > 0 ? (reviews.map(item => item.rating).reduce((prev, next) => prev + next) / reviews.length).toFixed(2) : 0}</p>
 
                             </div>
 
@@ -152,13 +153,16 @@ const Product = ({ moq, getReviewsById, reviews: { data: reviews }, product }) =
 
                             <Tab.Panel>
 
-                                <div className='flex flex-col px-2 py-5'>
+                                <form className='flex flex-col px-2 py-5' onSubmit={(e) => {
+                                    e.preventDefault();
+                                    toast.error('Please fill all fields !');
+                                }}>
 
                                     <h1 className='text-md text-tangerine font-bold'>Size</h1>
 
                                     <div className='flex flex-row gap-x-3 my-4'>
 
-                                        {product?.readable_sizes && product?.readable_sizes.length > 0 && product?.readable_sizes.map((size, i) => <button key={i} className='py-1 px-5 border-2 border-tangerine hover:border-litudian-orange text-tangerine hover:text-litudian-orange font-bold capitalize rounded'>{size?.value}</button>)}
+                                        {product?.readable_sizes && product?.readable_sizes.length > 0 && product?.readable_sizes.map((size, i) => <button type='button' key={i} className='py-1 px-5 border-2 border-tangerine hover:border-litudian-orange text-tangerine hover:text-litudian-orange font-bold capitalize rounded'>{size?.value}</button>)}
 
                                     </div>
 
@@ -170,7 +174,7 @@ const Product = ({ moq, getReviewsById, reviews: { data: reviews }, product }) =
 
                                             <span className='font-bold m-0 capitalize'>{color?.label}</span>
 
-                                            <button className='py-1 px-5 border-2 border-gray-500 hover:border-litudian-orange text-tangerine hover:text-litudian-orange font-bold capitalize rounded m-0 w-full'>2</button>
+                                            <button type='button' className='py-1 px-5 border-2 border-gray-500 hover:border-litudian-orange text-tangerine hover:text-litudian-orange font-bold capitalize rounded m-0 w-full'>2</button>
 
                                         </div>)}
 
@@ -218,9 +222,9 @@ const Product = ({ moq, getReviewsById, reviews: { data: reviews }, product }) =
 
                                     </div>
 
-                                    <button className='w-full rounded-full bg-tangerine text-white py-2 my-4'>Add to Orders</button>
+                                    <button className='w-full rounded-full bg-tangerine text-white py-2 my-4' type='submit'>Add to Orders</button>
 
-                                </div>
+                                </form>
 
                             </Tab.Panel>
 
@@ -234,9 +238,9 @@ const Product = ({ moq, getReviewsById, reviews: { data: reviews }, product }) =
 
                             <Tab.Panel>
 
-                                <div className='flex flex-col'>
+                                <div className='flex flex-col relative'>
 
-                                    {authenticated && <div className='w-full flex flex-row items-center justify-end'>
+                                    {authenticated && <div className='absolute w-fit top-0 right-5'>
 
                                         <button className='bg-tangerine text-white text-base rounded px-6 py-2' onClick={() => toggleRatingModal()}>Add Review</button>
 
@@ -281,274 +285,6 @@ const Product = ({ moq, getReviewsById, reviews: { data: reviews }, product }) =
             </div>
 
         </div>
-
-        {/* <div className="flex flex-col md:flex-row bg-white rounded-md shadow-md my-5 p-4 gap-x-3">
-
-            <div className="md:flex-1 flex flex-col gap-y-3 px-3">
-
-                <h1 className="text-2xl text-tangerine font-bold uppercase">{moq !== null && moq?.product[0]?.name}</h1>
-
-                <div className="bg-white h-full w-full rounded-md shadow-sm">
-
-                    <img className='h-full object-contain w-full' src={moq !== null ? moq?.product[0]?.images[0] : ''} alt={"product"} />
-
-                </div>
-
-            </div>
-
-            <div className="md:flex-1 flex flex-col">
-
-                <h1 className="text-bold text-gray-900 uppercase font-extrabold">10 Items In Stock</h1>
-
-                <p className="text-tangerine uppercase font-bold text-sm">67% Sold</p>
-
-                <table className="my-7">
-
-                    <thead>
-
-                        <tr>
-
-                            <td className="font-extrabold text-gray-900 uppercase text-xs">Profit</td>
-
-                            <td className="font-extrabold text-gray-900 uppercase text-xs">: <span className="text-tangerine">14,000</span></td>
-
-                        </tr>
-
-                        <tr>
-
-                            <td className="font-extrabold text-gray-900 uppercase text-xs">In Stock</td>
-
-                            <td className="font-extrabold text-gray-900 uppercase text-xs">: <span className="text-tangerine">12 Items</span></td>
-
-                        </tr>
-
-                    </thead>
-
-                </table>
-
-                <div className="flex flex-col my-1">
-
-                    <h1 className="text-gray-900 uppercase font-extrabold text-xs">Size</h1>
-
-                    <div className="grid grid-cols-4 gap-x-4">
-
-                        <div className="bg-gray-200 flex flex-row rounded-md my-2 shadow">
-
-                            <div className="bg-litudian-orange py-1 text-white px-2 rounded-md font-bold">36</div>
-
-                            <div className="bg-transparent py-1 flex-1 flex flex-col items-end justify-center text-gray-800 font-bold px-3">5</div>
-
-                        </div>
-
-                        <div className="bg-gray-200 flex flex-row rounded-md my-2 shadow">
-
-                            <div className="bg-tangerine py-1 text-white px-2 rounded-md font-bold">37</div>
-
-                            <div className="bg-transparent py-1 flex-1 flex flex-col items-end justify-center text-gray-800 font-bold px-3">3</div>
-
-                        </div>
-
-                        <div className="bg-gray-200 flex flex-row rounded-md my-2 shadow">
-
-                            <div className="bg-tangerine py-1 text-white px-2 rounded-md font-bold">38</div>
-
-                            <div className="bg-transparent py-1 flex-1 flex flex-col items-end justify-center text-gray-800 font-bold px-3">1</div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div className="flex flex-col mt-5 mb-10">
-
-                    <h1 className="text-gray-900 uppercase font-extrabold text-xs">Colors</h1>
-
-                    <div className="grid grid-cols-4 gap-x-4">
-
-                        <div className="bg-gray-200 flex flex-row rounded-md my-2 shadow">
-
-                            <div className="bg-purple-900 py-1 text-white px-2 w-9 h-full rounded-md font-bold"></div>
-
-                            <div className="bg-transparent py-1 flex-1 flex flex-col items-end justify-center text-gray-800 font-bold px-3">2</div>
-
-                        </div>
-
-                        <div className="bg-gray-200 flex flex-row rounded-md my-2 shadow">
-
-                            <div className="bg-blue-500 py-1 text-white px-2 w-9 h-full rounded-md font-bold"></div>
-
-                            <div className="bg-transparent py-1 flex-1 flex flex-col items-end justify-center text-gray-800 font-bold px-3">1</div>
-
-                        </div>
-
-                        <div className="bg-gray-200 flex flex-row rounded-md my-2 shadow">
-
-                            <div className="bg-green-500 py-1 text-white px-2 w-9 h-full rounded-md font-bold"></div>
-
-                            <div className="bg-transparent py-1 flex-1 flex flex-col items-end justify-center text-gray-800 font-bold px-3">1</div>
-
-                        </div>
-
-                        <div className="bg-gray-200 flex flex-row rounded-md my-2 shadow">
-
-                            <div className="bg-red-500 py-1 text-white px-2 w-9 h-full rounded-md font-bold"></div>
-
-                            <div className="bg-transparent py-1 flex-1 flex flex-col items-end justify-center text-gray-800 font-bold px-3">1</div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div className="flex-1 flex flex-col">
-
-                <h1 className="text-bold text-gray-900 uppercase font-extrabold  mb-5">Track Sales</h1>
-
-                <div className="flex flex-col md:flex-row gap-x-4 bg-transparent">
-
-                    <div className="flex md:contents">
-
-                        <div className="col-start-2 col-end-4 mr-10 md:mx-auto relative">
-
-                            <div className="h-full w-3 flex items-center justify-center">
-
-                                <div className="h-full w-1 bg-litudian-orange pointer-events-none"></div>
-
-                            </div>
-
-                            <div className="w-3 h-3 absolute top-1/3 -mt-3 rounded-full bg-tangerine shadow text-center"></div>
-
-                        </div>
-
-                        <div className="bg-transparent col-start-4 col-end-12 p-1 rounded-xl my-1 mr-auto w-full">
-
-                            <h3 className="text-sm font-extrabold mb-1 text-gray-900 uppercase">Charles Darwin Doe</h3>
-
-                            <p className="leading-tight text-justify w-full text-gray-300 text-xs font-extrabold">12:00</p>
-
-                            <p className="leading-tight text-justify w-full text-litudian-orange text-xs font-extrabold capitalize">1 Air mAX</p>
-
-                            <p className="leading-tight text-justify w-full text-tangerine text-xs font-extrabold">Ksh 1,200</p>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div className="flex flex-col md:flex-row gap-x-4 bg-transparent">
-
-                    <div className="flex md:contents">
-
-                        <div className="col-start-2 col-end-4 mr-10 md:mx-auto relative">
-
-                            <div className="h-full w-3 flex items-center justify-center">
-
-                                <div className="h-full w-1 bg-litudian-orange pointer-events-none"></div>
-
-                            </div>
-
-                            <div className="w-3 h-3 absolute top-1/3 -mt-3 rounded-full bg-tangerine shadow text-center"></div>
-
-                        </div>
-
-                        <div className="bg-transparent col-start-4 col-end-12 p-1 rounded-xl my-1 mr-auto w-full">
-
-                            <h3 className="text-sm font-extrabold mb-1 text-gray-900 uppercase">Charles Darwin Doe</h3>
-
-                            <p className="leading-tight text-justify w-full text-gray-300 text-xs font-extrabold">12:00</p>
-
-                            <p className="leading-tight text-justify w-full text-litudian-orange text-xs font-extrabold capitalize">1 Air mAX</p>
-
-                            <p className="leading-tight text-justify w-full text-tangerine text-xs font-extrabold">Ksh 1,200</p>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div className="flex flex-col md:flex-row gap-x-4 bg-transparent">
-
-                    <div className="flex md:contents">
-
-                        <div className="col-start-2 col-end-4 mr-10 md:mx-auto relative">
-
-                            <div className="h-full w-3 flex items-center justify-center">
-
-                                <div className="h-full w-1 bg-litudian-orange pointer-events-none"></div>
-
-                            </div>
-
-                            <div className="w-3 h-3 absolute top-1/3 -mt-3 rounded-full bg-tangerine shadow text-center"></div>
-
-                        </div>
-
-                        <div className="bg-transparent col-start-4 col-end-12 p-1 rounded-xl my-1 mr-auto w-full">
-
-                            <h3 className="text-sm font-extrabold mb-1 text-gray-900 uppercase">Charles Darwin Doe</h3>
-
-                            <p className="leading-tight text-justify w-full text-gray-300 text-xs font-extrabold">12:00</p>
-
-                            <p className="leading-tight text-justify w-full text-litudian-orange text-xs font-extrabold capitalize">1 Air mAX</p>
-
-                            <p className="leading-tight text-justify w-full text-tangerine text-xs font-extrabold">Ksh 1,200</p>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div className="flex flex-col md:flex-row gap-x-4 bg-transparent">
-
-                    <div className="flex md:contents">
-
-                        <div className="col-start-2 col-end-4 mr-10 md:mx-auto relative">
-
-                            <div className="h-full w-3 flex items-center justify-center">
-
-                                <div className="h-full w-1 bg-litudian-orange pointer-events-none"></div>
-
-                            </div>
-
-                            <div className="w-3 h-3 absolute top-1/3 -mt-3 rounded-full bg-tangerine shadow text-center"></div>
-
-                        </div>
-
-                        <div className="bg-transparent col-start-4 col-end-12 p-1 rounded-xl my-1 mr-auto w-full">
-
-                            <h3 className="text-sm font-extrabold mb-1 text-gray-900 uppercase">Charles Darwin Doe</h3>
-
-                            <p className="leading-tight text-justify w-full text-gray-300 text-xs font-extrabold">12:00</p>
-
-                            <p className="leading-tight text-justify w-full text-litudian-orange text-xs font-extrabold capitalize">1 Air mAX</p>
-
-                            <p className="leading-tight text-justify w-full text-tangerine text-xs font-extrabold">Ksh 1,200</p>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        {moq !== null && moq?.product[0]?.images !== undefined &&  moq?.product[0]?.images.length > 1 && <div className="grid grid-cols-4 gap-3 py-5">
-                                
-            {moq?.product[0]?.images.map((image, i) => <div key={i} className="bg-white h-36 w-full rounded-md shadow-sm">
-
-                <img className='h-48 object-contain w-full' src={image || "https://via.placeholder.com/300"} alt={"product"} onError={(e) => { e.target.src = "https://via.placeholder.com/300" }} />
-
-            </div>)}
-
-        </div>} */}
 
         <Rating toggle={toggleRatingModal} open={show} product={product} />
 
