@@ -4,8 +4,9 @@ import { Fragment, useState } from 'react'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getReviewsById, submitReview } from './../store/actions/ReviewActions';
+import { toast } from 'react-toastify';
 
-const RatingModal = ({ open, toggle, product, submitReview }) => {
+const RatingModal = ({ open, toggle, product, submitReview, getReviewsById }) => {
 
     const [rating, setRating] = useState(0);
 
@@ -30,10 +31,12 @@ const RatingModal = ({ open, toggle, product, submitReview }) => {
             let result = await submitReview(obj);
 
             if (result) {
-
+                
                 await getReviewsById(product?.id);
 
             }
+
+            toast.success('Review Submitted Successfully !');
 
             toggle();
             
