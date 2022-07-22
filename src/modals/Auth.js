@@ -85,11 +85,7 @@ class Auth extends Component {
 
             const { first_name, last_name, msisdn, email, password, confirm_password } = this.state;
 
-            // console.log({ first_name, last_name, email, msisdn, password, confirm_password });
-
-            let response = await instance.post('users', { first_name, last_name, username: first_name, msisdn, email, password, confirm_password });
-
-            console.log(response);
+            await instance.post('users', { first_name, last_name, username: first_name, msisdn, email, password, confirm_password });
 
             toast(`You have registered in successfully !`);
 

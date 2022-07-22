@@ -6,6 +6,7 @@ import moqs from './MoqReducer';
 import products from './ProductReducer';
 import user from './UserReducer';
 import reviews from './ReviewReducer';
+import bids from './BidReducer';
 
 export default combineReducers({
 
@@ -17,6 +18,8 @@ export default combineReducers({
 
     user,
 
-    reviews
+    reviews,
+
+    bids
 
 });

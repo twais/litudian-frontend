@@ -7,3 +7,4 @@ export const ALL_MOQS = 'ALL_MOQS';
 export const GET_MOQ = 'GET_MOQ';
 export const CURRENT_USER = 'CURRENT_USER';
 export const REVIEWS = 'REVIEWS';
+export const BIDS = 'BIDS'

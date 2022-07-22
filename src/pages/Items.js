@@ -1,12 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component} from 'react';
 import { Link } from 'react-router-dom';
 import Layout from './../layouts/Main';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getCategories } from './../store/actions/CategoryActions';
 import { getMoqs } from './../store/actions/MoqActions';
+import { getUserBids } from './../store/actions/BidActions';
 import CategoryMOQsCard from './../components/CategoryMOQsCard';
-import MOQ from './../components/MOQ';
+import Bid from '../components/Bid';
 
 class Items extends Component {
 
@@ -15,8 +16,6 @@ class Items extends Component {
         super(props);
     
         this.state = {
-
-
              
         }
 
@@ -28,11 +27,13 @@ class Items extends Component {
 
         await this.props.getMoqs();
 
+        await this.props.getUserBids();
+
     }
 
     render() {
 
-        let { categories: { data }, moqs: { moqs } } = this.props;
+        let { categories: { data }, bids: { data: bids } } = this.props;
 
         return (
 
@@ -46,21 +47,21 @@ class Items extends Component {
 
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 py-5">
+                <div className="flex flex-col mt-5">
 
-                    {data.splice(0, 2).map((category, i) => <CategoryMOQsCard key={i} category={category} />)}
-
-                </div>
-
-                <div className="flex flex-col">
-
-                    <h1 className="text-tangerine font-bold uppercase">Other Products</h1>
+                    <h1 className="text-tangerine font-bold uppercase">My Items</h1>
 
                     <div className="grid grid-cols-1 md:grid-cols-5 gap-4 py-5">
 
-                        {moqs.map((moq, i) => <MOQ key={i} moq={moq} />)}
+                        {bids && bids.length > 0 && bids.map((bid, i) => <Bid key={i} bid={bid} />)}
 
                     </div>
+
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 py-5">
+
+                    {data.splice(0, 2).map((category, i) => <CategoryMOQsCard key={i} category={category} />)}
 
                 </div>
                 
@@ -78,7 +79,9 @@ const mapStateToProps = (state) => {
 
         categories: state.categories,
 
-        moqs: state.moqs
+        moqs: state.moqs,
+
+        bids:  state.bids
 
     }
 
@@ -86,7 +89,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch)  => { 
 
-    return bindActionCreators({ getCategories, getMoqs }, dispatch);
+    return bindActionCreators({ getCategories, getMoqs, getUserBids }, dispatch);
 
 };
 
