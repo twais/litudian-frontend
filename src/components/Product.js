@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getReviewsById } from './../store/actions/ReviewActions';
 import Rating from './../modals/Rating';
-import { toast } from 'react-toastify';
+// import { toast } from 'react-toastify';
 
 const expiry = localStorage.getItem('ltdn_exp');
 const currentTime = Date.now() / 1000;
@@ -19,6 +19,7 @@ function classNames(...classes) {
 const Product = ({ moq, getReviewsById, reviews: { data: reviews }, product }) => {
 
     const [show, setShow] = useState(false);
+    const [bidAttributes, setBidAttributes] = useState( [{ size_id: 0, quantity: 0, color_id: 0 }]);
     
     React.useEffect(() => {
 
@@ -48,6 +49,42 @@ const Product = ({ moq, getReviewsById, reviews: { data: reviews }, product }) =
     }
 
     const toggleRatingModal = () => setShow(!show)
+
+    const handleAddClick = () => {
+
+        setBidAttributes([...bidAttributes, { size_id: 0, quantity: 0, color_id: 0 }]);
+
+    };
+
+    const handleRemoveClick = index => {
+
+        let list = [...bidAttributes];
+
+        list.splice(index, 1);
+
+        setBidAttributes(list);
+
+    };
+
+    const handleInputChange = (e, index, color_id = false) => {
+
+        const { name, value } = e.target;
+
+        let attributes = [...bidAttributes];
+
+        if (color_id === true) {
+
+            attributes[index]["color_id"] = parseInt(value);
+
+        } else {
+
+            attributes[index][name] = parseInt(value);
+
+        }
+
+        setBidAttributes(attributes);
+
+    };
     
     return (
 
@@ -153,12 +190,150 @@ const Product = ({ moq, getReviewsById, reviews: { data: reviews }, product }) =
 
                             <Tab.Panel>
 
-                                <form className='flex flex-col px-2 py-5' onSubmit={(e) => {
+                                <div className='w-full grid grid-cols-3'>
+
+                                    <div className='col-span-2 flex flex-col space-y-3'>
+
+                                        <h2 className='text-md text-tangerine font-bold'>Total Quantity</h2>
+
+                                        <input className='border-2 border-litudian-orange px-4 py-1 rounded w-full focus:outline-none' type={'number'} min={0} />
+
+                                        <h2 className='text-md text-tangerine font-bold'>Bid Attributes</h2>
+
+                                        {bidAttributes.map((x, i) => (
+
+                                            <div key={i} className='w-full flex flex-row justify-between items-center mb-5'>
+
+                                                <div className='flex flex-row items-start justify-start space-x-4'>
+
+                                                    <div className='space-y-2'>
+
+                                                        <h4 className='text-gray-600 font-semibold'>Size</h4>
+
+                                                        <div className='border-2 border-litudian-orange px-4 py-1 rounded'>
+
+                                                            <select  name="size_id" value={x.size_id} className='text-sm focus:outline-none text-gray-500 w-full' onChange={e => handleInputChange(e, i)}>
+
+                                                                <option value={''}>Select Size</option>
+
+                                                                {product?.readable_sizes && product?.readable_sizes.length > 0 && product?.readable_sizes.map((size, i) => <option key={i} value={size.id}>{size?.label}</option>)}
+
+                                                            </select>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div className='space-y-2'>
+
+                                                        <h4 className='text-gray-600 font-semibold'>Color</h4>
+
+                                                        <div className='grid grid-cols-3 gap-1'>
+
+                                                            {product?.readable_colors && product?.readable_colors.length > 0 && product?.readable_colors.map((color, z) => <div key={z} className='flex flex-row items-center justify-start space-x-2'>
+                                                                
+                                                                <input type="radio" name={`color_id-${i}`} value={color.id} onChange={e => handleInputChange(e, i, true)} />
+
+                                                                <div className='flex flex-row items-center justify-start space-x-2'>
+
+                                                                    <div className='h-5 w-5 rounded shadow-sm' style={{ backgroundColor: `${color?.value}` }}></div>
+
+                                                                </div>
+                                                                
+                                                            </div>)}
+                                                            
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div className='space-y-2'>
+
+                                                        <h4 className='text-gray-600 font-semibold'>Quantity</h4>
+
+                                                        <input className='border-2 border-litudian-orange px-4 py-1 rounded w-20 focus:outline-none' type={'number'} min={0} name="quantity" value={x.quantity} onChange={e => handleInputChange(e, i)} />
+
+                                                    </div>
+
+                                                </div>
+
+                                                <div className='flex flex-row justify-between items-end space-x-3 h-full'>
+
+                                                    {bidAttributes.length - 1 === i && <button className='bg-tangerine text-white p-2 rounded shadow-sm text-sm' onClick={() => handleAddClick()}>
+
+                                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+                                                        </svg>
+
+                                                    </button>}
+
+                                                    {bidAttributes.length !== 1 && <button className='bg-tangerine text-white p-2 rounded shadow-sm text-sm' onClick={() => handleRemoveClick(i)}>
+
+                                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                        </svg>
+
+                                                    </button>}
+
+                                                </div>
+
+                                            </div>
+
+                                        ))}
+
+                                        <h1 className='text-md text-tangerine font-bold'>Shipping Method</h1>
+
+                                        <div className='gap-x-3 my-4 grid grid-cols-2'>
+
+                                            <div className='flex flex-row rounded border-2 border-litudian-orange'>
+
+                                                <div className='px-4 bg-green-500 text-white flex flex-col justify-center items-center'>
+
+                                                    <img className='m-0 p-0' src='/img/ship.png' alt='ship' />
+
+                                                </div>
+
+                                                <div className='flex flex-col flex-1 px-2 py-1'>
+
+                                                    <h4 className='text-gray-700 text-sm mb-0 font-bold'>Shipping</h4>
+
+                                                    <p className='text-xs text-gray-500'>Ksh 260</p>
+
+                                                </div>
+
+                                            </div>
+
+                                            <div className='flex flex-row rounded border-2 border-litudian-orange'>
+
+                                                <div className='px-4 bg-blue-500 text-white flex flex-col justify-center items-center'>
+
+                                                    <img className='m-0 p-0' src='/img/plane.png' alt='plane' />
+
+                                                </div>
+
+                                                <div className='flex flex-col flex-1 px-2 py-1'>
+
+                                                    <h4 className='text-gray-700 text-sm mb-0 font-bold'>Air</h4>
+
+                                                    <p className='text-xs text-gray-500'>Ksh 260</p>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div></div>
+
+                                </div>
+
+                                {/* <form className='flex flex-col px-2 py-5' onSubmit={(e) => {
                                     e.preventDefault();
                                     toast.error('Please fill all fields !');
-                                }}>
+                                }}> */}
 
-                                    <h1 className='text-md text-tangerine font-bold'>Size</h1>
+                                    {/* <h1 className='text-md text-tangerine font-bold'>Size</h1>
 
                                     <div className='flex flex-row gap-x-3 my-4'>
 
@@ -178,9 +353,9 @@ const Product = ({ moq, getReviewsById, reviews: { data: reviews }, product }) =
 
                                         </div>)}
 
-                                    </div>
+                                    </div> */}
 
-                                    <h1 className='text-md text-tangerine font-bold'>Shipping Method</h1>
+                                    {/* <h1 className='text-md text-tangerine font-bold'>Shipping Method</h1>
 
                                     <div className='gap-x-3 my-4 grid grid-cols-4'>
 
@@ -220,11 +395,11 @@ const Product = ({ moq, getReviewsById, reviews: { data: reviews }, product }) =
 
                                         </div>
 
-                                    </div>
+                                    </div> */}
 
-                                    <button className='w-full rounded-full bg-tangerine text-white py-2 my-4' type='submit'>Add to Orders</button>
+                                    {/* <button className='w-full rounded-full bg-tangerine text-white py-2 my-4' type='submit'>Add to Orders</button> */}
 
-                                </form>
+                                {/* </form> */}
 
                             </Tab.Panel>
 
